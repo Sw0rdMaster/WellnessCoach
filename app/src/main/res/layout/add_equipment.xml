@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Spinner
+            android:layout_width="128dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/spinEquip"
+            android:entries="@array/equip_list"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:spinnerMode="dropdown">
+        </Spinner>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/spinEquip"
+            android:layout_above="@+id/button8">
+
+
+            <ViewFlipper xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/vf"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+
+                <include android:id="@+id/include0" layout="@layout/fragment_empty" />
+                <include android:id="@+id/include1" layout="@layout/fragment_dampfbad" />
+                <include android:id="@+id/include2" layout="@layout/fragment_whirlpool" />
+                <include android:id="@+id/include3" layout="@layout/fragment_whirlpool" />
+                <include android:id="@+id/include4" layout="@layout/fragment_whirlpool" />
+
+            </ViewFlipper>
+
+
+        </RelativeLayout>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bestätigen"
+            android:id="@+id/button8"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:onClick="onEquipConfirmed"
+            android:nestedScrollingEnabled="false" />
+
+    </RelativeLayout>
+
+</LinearLayout>
