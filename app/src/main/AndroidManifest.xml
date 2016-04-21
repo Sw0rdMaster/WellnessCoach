@@ -32,6 +32,8 @@
         </activity>
         <activity android:name=".ProposeTreatement" >
         </activity>
+        <activity android:name=".Voting" >
+        </activity>
     </application>
 
 </manifest>

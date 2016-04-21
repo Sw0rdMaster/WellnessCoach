@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -26,6 +27,7 @@ import java.util.ArrayList;
 public class ProposeTreatement extends Activity {
 
     LinearLayout linearLayout;
+    Button confirmButton;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -46,6 +48,7 @@ public class ProposeTreatement extends Activity {
             {
                 createTable(jsonArray.getJSONObject(i));
             }
+            addButton();
 
         }
         catch(Exception e)
@@ -89,8 +92,27 @@ public class ProposeTreatement extends Activity {
         textView.setText(treatmentList.get(treatmentList.size() - 1));
         linearLayout.addView(textView);
 
+
     }
 
+    public void addButton()
+    {
+        confirmButton = new Button(this);
+        confirmButton.setText("Hallo");
+        confirmButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onConfirmButton();
+            }
+        });
+        linearLayout.addView(confirmButton);
+    }
+
+    public void onConfirmButton()
+    {
+        Intent goToVotingIntent = new Intent(this, Voting.class);
+        startActivity(goToVotingIntent);
+    }
 
 }
 
