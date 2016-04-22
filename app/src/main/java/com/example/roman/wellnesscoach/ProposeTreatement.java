@@ -3,13 +3,16 @@ package com.example.roman.wellnesscoach;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.Rating;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -28,6 +31,7 @@ public class ProposeTreatement extends Activity {
 
     LinearLayout linearLayout;
     Button confirmButton;
+    ScrollView scrollView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -74,7 +78,9 @@ public class ProposeTreatement extends Activity {
         }
 
 
-        setContentView(linearLayout);
+        scrollView = new ScrollView(this);
+
+        //setContentView(linearLayout);
         linearLayout.setOrientation(LinearLayout.VERTICAL);
         for( int i = 0; i < (treatmentList.size()-1); i++ )
         {
@@ -84,14 +90,21 @@ public class ProposeTreatement extends Activity {
                 textView.setPadding(20, 20, 20, 20);
                 textView.setText(treatmentList.get(i));
                 linearLayout.addView(textView);
+                //RatingBar ratingBar = new RatingBar(this);
+                //RatingBar ratingBar = (RatingBar) findViewById(R.id.ratingBar);
+                //linearLayout.addView(ratingBar);
+
             }
         }
+
         TextView textView = new TextView(this);
         textView.setBackgroundResource(R.drawable.checkboxline_fat);
         textView.setPadding(20, 20, 20, 20);
         textView.setText(treatmentList.get(treatmentList.size() - 1));
         linearLayout.addView(textView);
 
+        scrollView.addView(linearLayout);
+        setContentView(scrollView);
 
     }
 
