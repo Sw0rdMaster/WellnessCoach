@@ -3,12 +3,19 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="510dp">
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="511dp"
+        android:id="@+id/scrollPropose" >
 
-    </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="510dp"
+            android:id="@+id/linearPropose">
+
+        </LinearLayout>
+    </ScrollView>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -20,7 +27,8 @@
             android:text="Bestätigen"
             android:id="@+id/cofirmButton"
             android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            android:onClick="onConfirmButton" />
     </RelativeLayout>
 
 </LinearLayout>

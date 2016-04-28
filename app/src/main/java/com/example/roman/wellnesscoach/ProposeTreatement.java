@@ -32,15 +32,17 @@ public class ProposeTreatement extends Activity {
     LinearLayout linearLayout;
     Button confirmButton;
     ScrollView scrollView;
+    String treatmentString;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.propose_treatment);
-        linearLayout = new LinearLayout(this);
-        String treatment = getIntent().getExtras().getString("JSON", "");
-        System.out.println("Treatment: " + treatment);
-        createTreatment(treatment);
+        //linearLayout = new LinearLayout(this);
+        linearLayout = (LinearLayout) findViewById(R.id.linearPropose);
+        treatmentString = getIntent().getExtras().getString("JSON", "");
+        System.out.println("Treatment: " + treatmentString);
+        createTreatment(treatmentString);
 
     }
 
@@ -52,7 +54,7 @@ public class ProposeTreatement extends Activity {
             {
                 createTable(jsonArray.getJSONObject(i));
             }
-            addButton();
+            //addButton();
 
         }
         catch(Exception e)
@@ -78,7 +80,7 @@ public class ProposeTreatement extends Activity {
         }
 
 
-        scrollView = new ScrollView(this);
+        scrollView = (ScrollView)findViewById(R.id.scrollPropose);
 
         //setContentView(linearLayout);
         linearLayout.setOrientation(LinearLayout.VERTICAL);
@@ -103,11 +105,12 @@ public class ProposeTreatement extends Activity {
         textView.setText(treatmentList.get(treatmentList.size() - 1));
         linearLayout.addView(textView);
 
-        scrollView.addView(linearLayout);
-        setContentView(scrollView);
+        //scrollView.addView(linearLayout);
+        //setContentView(scrollView);
 
     }
 
+    /*
     public void addButton()
     {
         confirmButton = new Button(this);
@@ -119,11 +122,13 @@ public class ProposeTreatement extends Activity {
             }
         });
         linearLayout.addView(confirmButton);
-    }
+    }*/
 
-    public void onConfirmButton()
+    public void onConfirmButton(View v)
     {
         Intent goToVotingIntent = new Intent(this, Voting.class);
+        System.out.println("An Voting = " + treatmentString);
+        goToVotingIntent.putExtra("JSON", treatmentString);
         startActivity(goToVotingIntent);
     }
 

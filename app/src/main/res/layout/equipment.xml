@@ -60,10 +60,11 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Funktionen anpassen"
-                android:id="@+id/button7"
+                android:text="Zurück"
+                android:id="@+id/bBack"
                 android:layout_below="@+id/button6"
-                android:layout_centerHorizontal="true" />
+                android:layout_centerHorizontal="true"
+                android:onClick="backToOverview" />
         </RelativeLayout>
 
     </LinearLayout>

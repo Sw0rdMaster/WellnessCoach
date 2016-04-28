@@ -111,6 +111,12 @@ public class Equipment_Overview extends ListActivity {
         return true;
     }
 
+    public void backToOverview(View v)
+    {
+        Intent goToOverview = new Intent(this, Overview.class);
+        startActivity(goToOverview);
+    }
+
 
 
 
