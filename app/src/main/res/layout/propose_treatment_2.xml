@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/FragmentBackground"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:paddingBottom="40dp"
+    android:weightSum="1">
+
+    <Button
+        android:id="@+id/bDevice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Gerät"
+        android:layout_weight="0.58"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="0dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="0dp"
+        android:layout_toStartOf="@+id/bStart" />
+
+    <Button
+        android:id="@+id/bStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Start"
+        android:layout_weight="0.58"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <RelativeLayout
+        android:id="@+id/rel1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bDevice"
+        android:layout_marginBottom="15dp"
+        android:layout_centerVertical="true">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:id="@+id/treatList"
+            android:layout_height="wrap_content">
+
+        </LinearLayout>
+    </RelativeLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Gerät Fertig"
+        android:id="@+id/bFertig"
+        android:layout_below="@+id/rel1"
+        android:enabled="false"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Restzeit"
+        android:id="@+id/tTime"
+        android:gravity="center_vertical|center_horizontal"
+        android:layout_below="@+id/rel1"
+        android:layout_toRightOf="@+id/bFertig"
+        android:layout_above="@+id/bWeiter"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/back"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nächstes Gerät"
+        android:id="@+id/bWeiter"
+        android:layout_below="@+id/bFertig"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:enabled="false"
+        android:layout_toStartOf="@+id/tTime"
+        android:layout_toLeftOf="@+id/tTime" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Restzeit Pause"
+        android:id="@+id/tPause"
+        android:gravity="center_vertical|center_horizontal"
+        android:layout_below="@+id/tTime"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignBottom="@+id/bWeiter"
+        android:background="@drawable/back"
+        android:layout_toEndOf="@+id/bFertig" />
+
+</RelativeLayout>

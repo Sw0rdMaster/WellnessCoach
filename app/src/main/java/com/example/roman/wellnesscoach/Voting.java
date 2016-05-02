@@ -54,51 +54,18 @@ public class Voting extends AppCompatActivity{
         listView.getAdapter().getItem(3);
 
 
-
-
-
-        //listView.setAdapter(adapter);
-
-        //listView.setOnItemClickListener(onItemClickListener());
     }
 
-    /*private AdapterView.OnItemClickListener onItemClickListener() {
-        return new AdapterView.OnItemClickListener() {
-            @SuppressLint("SetTextI18n")
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                final Dialog dialog = new Dialog(Voting.this);
-                dialog.setContentView(R.layout.layout_dialog);
-                dialog.setTitle("Movie details");
-
-                TextView name = (TextView) dialog.findViewById(R.id.movie_name);
-                TextView country = (TextView) dialog.findViewById(R.id.country);
-                TextView starRate = (TextView) dialog.findViewById(R.id.rate);
-
-                Movie movie = (Movie) parent.getAdapter().getItem(position);
-                name.setText("Movie name: " + movie.getName());
-                country.setText("Producing country: " + movie.getCountry());
-                starRate.setText("Your rate: " + movie.getRatingStar());
-
-                dialog.show();
-            }
-        };
-    }*/
 
     public void createTable(JSONObject jsono) {
 
         try {
-            //arrayList.add(new Movie(1, "Gerät: " + jsono.getString("Device") , null));
-            //arrayList.add(new Movie(1, null, null));
             Button titleButton = (Button)findViewById(R.id.titleButton);
             titleButton.setText(jsono.getString("Device"));
+            arrayList.add(new Movie(1, "Temperatur " + jsono.getString("Temperatur"), null));
             arrayList.add(new Movie(1, "Licht " + jsono.getString("Light"), null));
-            arrayList.add(new Movie(1, "Musik " + jsono.getString("Musik"), null));
             arrayList.add(new Movie(1, "Kräuter " + jsono.getString("Krauter"), null));
-            arrayList.add(new Movie(1, "Sole " + jsono.getString("Sole"), null));
-
-
-
+            arrayList.add(new Movie(1, "Musik " + jsono.getString("Musik"), null));
 
         }
         catch(Exception e)

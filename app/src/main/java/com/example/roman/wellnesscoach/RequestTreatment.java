@@ -110,7 +110,8 @@ public class RequestTreatment extends Activity {
         {
             @Override
             public void processFinish(String output){
-                Intent showTreatment = new Intent(ctx, ProposeTreatement.class);
+                //Intent showTreatment = new Intent(ctx, ProposeTreatement.class);
+                Intent showTreatment = new Intent(ctx, ProposeTreatment_2.class);
                 System.out.println("Output = " + output);
                 showTreatment.putExtra("JSON", output);
                 startActivity(showTreatment);

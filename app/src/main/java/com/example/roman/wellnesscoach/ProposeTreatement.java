@@ -80,7 +80,7 @@ public class ProposeTreatement extends Activity {
         }
 
 
-        scrollView = (ScrollView)findViewById(R.id.scrollPropose);
+        //scrollView = (ScrollView)findViewById(R.id.scrollPropose);
 
         //setContentView(linearLayout);
         linearLayout.setOrientation(LinearLayout.VERTICAL);
@@ -124,13 +124,6 @@ public class ProposeTreatement extends Activity {
         linearLayout.addView(confirmButton);
     }*/
 
-    public void onConfirmButton(View v)
-    {
-        Intent goToVotingIntent = new Intent(this, Voting.class);
-        System.out.println("An Voting = " + treatmentString);
-        goToVotingIntent.putExtra("JSON", treatmentString);
-        startActivity(goToVotingIntent);
-    }
 
 }
 
