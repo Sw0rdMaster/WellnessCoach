@@ -1,27 +1,18 @@
 package com.example.roman.wellnesscoach;
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.app.Dialog;
-import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Roman on 20.04.2016.
@@ -29,8 +20,8 @@ import java.util.List;
 public class Voting extends AppCompatActivity{
 
     private ListView listView;
-    private ArrayAdapter<Movie> adapter;
-    private ArrayList<Movie> arrayList;
+    private ArrayAdapter<VotingBar> adapter;
+    private ArrayList<VotingBar> arrayList;
     private RelativeLayout myLayout;
     private int treatmentCounter;
     private String treatmentString;
@@ -62,10 +53,10 @@ public class Voting extends AppCompatActivity{
         try {
             Button titleButton = (Button)findViewById(R.id.titleButton);
             titleButton.setText(jsono.getString("Device"));
-            arrayList.add(new Movie(1, "Temperatur " + jsono.getString("Temperatur"), null));
-            arrayList.add(new Movie(1, "Licht " + jsono.getString("Light"), null));
-            arrayList.add(new Movie(1, "Kräuter " + jsono.getString("Krauter"), null));
-            arrayList.add(new Movie(1, "Musik " + jsono.getString("Musik"), null));
+            arrayList.add(new VotingBar(1, "Temperatur " + jsono.getString("Temperatur"), null));
+            arrayList.add(new VotingBar(1, "Licht " + jsono.getString("Light"), null));
+            arrayList.add(new VotingBar(1, "Kräuter " + jsono.getString("Krauter"), null));
+            arrayList.add(new VotingBar(1, "Musik " + jsono.getString("Musik"), null));
 
         }
         catch(Exception e)

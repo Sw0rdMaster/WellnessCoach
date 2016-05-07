@@ -1,33 +1,31 @@
 package com.example.roman.wellnesscoach;
 
 import android.app.Activity;
-import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
 import java.util.List;
 
-public class ListViewAdapter extends ArrayAdapter<Movie> {
+public class ListViewAdapter extends ArrayAdapter<VotingBar> {
 
     private AppCompatActivity activity;
-    private List<Movie> movieList;
+    private List<VotingBar> votingBarList;
 
-    public ListViewAdapter(AppCompatActivity context, int resource, List<Movie> objects) {
+    public ListViewAdapter(AppCompatActivity context, int resource, List<VotingBar> objects) {
         super(context, resource, objects);
         this.activity = context;
-        this.movieList = objects;
+        this.votingBarList = objects;
     }
 
     @Override
-    public Movie getItem(int position) {
-        return movieList.get(position);
+    public VotingBar getItem(int position) {
+        return votingBarList.get(position);
     }
 
     @Override
@@ -58,7 +56,7 @@ public class ListViewAdapter extends ArrayAdapter<Movie> {
         return new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
-                Movie item = getItem(position);
+                VotingBar item = getItem(position);
                 item.setRatingStar(v);
                 Log.i("Adapter", "star: " + v);
             }

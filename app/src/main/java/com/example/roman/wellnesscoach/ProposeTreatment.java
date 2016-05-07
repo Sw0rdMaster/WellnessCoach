@@ -1,28 +1,17 @@
 package com.example.roman.wellnesscoach;
 
-import android.app.Activity;
-import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.view.View;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.ScrollView;
-import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
 
 /**
  * Created by Roman on 28.04.2016.
  */
-public class ProposeTreatment_2 extends FragmentActivity {
+public class ProposeTreatment extends FragmentActivity {
 
 
     static int treatmentcounter = 0;
@@ -51,7 +40,7 @@ public class ProposeTreatment_2 extends FragmentActivity {
                 onLastResult();
             } else {
                 for (int i = treatmentcounter; i < jsonArray.length(); i++) {
-                    FragmentOne treatmentFragment = new FragmentOne();
+                    Treatment_Fragment treatmentFragment = new Treatment_Fragment();
 
                     Bundle bundle = new Bundle();
                     System.out.println("Treatment in Method = " + jsonArray.get(i).toString());

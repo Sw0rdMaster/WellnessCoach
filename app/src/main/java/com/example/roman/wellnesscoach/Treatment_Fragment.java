@@ -10,20 +10,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.json.JSONObject;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Roman on 28.04.2016.
  */
-public class FragmentOne extends Fragment {
+public class Treatment_Fragment extends Fragment {
 
     Button equipButton;
     Button startButton;
@@ -174,9 +172,9 @@ public class FragmentOne extends Fragment {
             @Override
             public void onFinish()
             {
-                Intent nextTreatment = new Intent(getActivity(), ProposeTreatment_2.class);
-                nextTreatment.putExtra("JSON", ProposeTreatment_2.treatmentString);
-                nextTreatment.putExtra("Counter", ProposeTreatment_2.treatmentcounter);
+                Intent nextTreatment = new Intent(getActivity(), ProposeTreatment.class);
+                nextTreatment.putExtra("JSON", ProposeTreatment.treatmentString);
+                nextTreatment.putExtra("Counter", ProposeTreatment.treatmentcounter);
                 startActivity(nextTreatment);
             }
         };

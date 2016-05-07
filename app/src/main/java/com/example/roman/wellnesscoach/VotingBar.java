@@ -1,15 +1,15 @@
 package com.example.roman.wellnesscoach;
 
 /**
- * Created by Roman on 26.04.2016.
+ * Created by Roman on 22.04.2016.
  */
-public class MovieWrapper {
+public class VotingBar {
 
     private float ratingStar;
     private String name;
     private String country;
 
-    public MovieWrapper(int ratingStar, String name, String country) {
+    public VotingBar(int ratingStar, String name, String country) {
         this.ratingStar = ratingStar;
         this.name = name;
         this.country = country;
@@ -38,5 +38,4 @@ public class MovieWrapper {
     public void setCountry(String country) {
         this.country = country;
     }
-
 }

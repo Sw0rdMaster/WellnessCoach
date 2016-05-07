@@ -84,21 +84,12 @@ public class Equipment_AddElement extends Activity{
 
                         switch(jsono.get("Device").toString())
                         {
-                            case "Dampfbad":
-                                dampfbadList.add(equipment);
-                                break;
-                            case "Sauna":
-                                saunaList.add(equipment);
-                                break;
-                            case "Whirlpool":
-                                whirlpoolList.add(equipment);
-                                break;
-                            case "Hotspring":
-                                hotSpringList.add(equipment);
-                                break;
+                            case "Dampfbad":    dampfbadList.add(equipment);    break;
+                            case "Sauna":       saunaList.add(equipment);       break;
+                            case "Whirlpool":   whirlpoolList.add(equipment);   break;
+                            case "Hotspring":   hotSpringList.add(equipment);   break;
                             default:
                                 System.out.println("Ich bin im Default gelandet");
-
                         }
 
 

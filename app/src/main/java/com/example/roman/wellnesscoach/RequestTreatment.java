@@ -9,23 +9,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.mindrot.jbcrypt.BCrypt;
-import org.w3c.dom.Text;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Roman on 12.04.2016.
@@ -110,8 +102,7 @@ public class RequestTreatment extends Activity {
         {
             @Override
             public void processFinish(String output){
-                //Intent showTreatment = new Intent(ctx, ProposeTreatement.class);
-                Intent showTreatment = new Intent(ctx, ProposeTreatment_2.class);
+                Intent showTreatment = new Intent(ctx, ProposeTreatment.class);
                 System.out.println("Output = " + output);
                 showTreatment.putExtra("JSON", output);
                 startActivity(showTreatment);
