@@ -9,30 +9,31 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/VaporsanaTheme" >
         <activity
-            android:name=".Login"
+            android:name=".Authentifizierung.Login"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@style/VaporsanaTheme"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Register" >
+        <activity android:name=".Authentifizierung.Register" >
         </activity>
-        <activity android:name=".Overview" >
+        <activity android:name=".Authentifizierung.MainWindow" >
         </activity>
-        <activity android:name=".Equipment_Overview" >
+        <activity android:name=".Equipment.Equipment_Overview" >
         </activity>
-        <activity android:name=".Equipment_AddElement" >
+        <activity android:name=".Equipment.Equipment_AddElement" >
         </activity>
-        <activity android:name=".RequestTreatment" >
+        <activity android:name=".Kurvorschlag.RequestTreatment" >
         </activity>
-        <activity android:name=".ProposeTreatment" >
+        <activity android:name=".Kurvorschlag.ProposeTreatment" >
         </activity>
-        <activity android:name=".Voting" >
+        <activity android:name=".Voting.Voting" >
         </activity>
     </application>
 

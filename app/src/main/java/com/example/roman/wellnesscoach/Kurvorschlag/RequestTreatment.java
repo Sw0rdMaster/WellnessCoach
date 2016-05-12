@@ -1,4 +1,4 @@
-package com.example.roman.wellnesscoach;
+package com.example.roman.wellnesscoach.Kurvorschlag;
 
 import android.app.Activity;
 import android.content.Context;
@@ -13,6 +13,9 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.Spinner;
+
+import com.example.roman.wellnesscoach.R;
+import com.example.roman.wellnesscoach.Server.ServerSchnittstelle;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

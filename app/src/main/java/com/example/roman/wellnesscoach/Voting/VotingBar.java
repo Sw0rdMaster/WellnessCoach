@@ -1,4 +1,4 @@
-package com.example.roman.wellnesscoach;
+package com.example.roman.wellnesscoach.Voting;
 
 /**
  * Created by Roman on 22.04.2016.

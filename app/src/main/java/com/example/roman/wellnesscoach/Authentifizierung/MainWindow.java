@@ -1,4 +1,4 @@
-package com.example.roman.wellnesscoach;
+package com.example.roman.wellnesscoach.Authentifizierung;
 
 import android.app.Activity;
 import android.content.Context;
@@ -8,7 +8,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-public class Overview extends Activity {
+import com.example.roman.wellnesscoach.Authentifizierung.Login;
+import com.example.roman.wellnesscoach.Equipment.Equipment_Overview;
+import com.example.roman.wellnesscoach.Kurvorschlag.RequestTreatment;
+import com.example.roman.wellnesscoach.R;
+
+public class MainWindow extends Activity {
 
     String name;
     TextView nameTV;
@@ -21,6 +26,11 @@ public class Overview extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.overview);
 
+        initialize();
+    }
+
+    public void initialize()
+    {
         nameTV = (TextView) findViewById(R.id.home_name);
         name = getIntent().getStringExtra("name");
         nameTV.setText("Welcome "+name);

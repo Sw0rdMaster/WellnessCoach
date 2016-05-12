@@ -1,4 +1,4 @@
-package com.example.roman.wellnesscoach;
+package com.example.roman.wellnesscoach.Voting;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +8,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+
+import com.example.roman.wellnesscoach.Authentifizierung.MainWindow;
+import com.example.roman.wellnesscoach.R;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -110,7 +113,7 @@ public class Voting extends AppCompatActivity{
         }
         else
         {
-            Intent backToOverview = new Intent(this, Overview.class);
+            Intent backToOverview = new Intent(this, MainWindow.class);
             startActivity(backToOverview);
         }
     }

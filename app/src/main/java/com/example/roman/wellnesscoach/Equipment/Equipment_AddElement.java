@@ -1,4 +1,4 @@
-package com.example.roman.wellnesscoach;
+package com.example.roman.wellnesscoach.Equipment;
 
 import android.app.Activity;
 import android.content.Context;
@@ -12,6 +12,9 @@ import android.widget.CheckBox;
 import android.widget.Spinner;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
+
+import com.example.roman.wellnesscoach.R;
+import com.example.roman.wellnesscoach.Server.ServerSchnittstelle;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -52,8 +55,7 @@ public class Equipment_AddElement extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_equipment);
         getUser();
-        getElements();
-        //pseudoEquipment();
+        initialize();
         spinnerEvent();
         checkFunctions();
         JSONObject json = getAllDevicesJSON();
@@ -113,7 +115,7 @@ public class Equipment_AddElement extends Activity{
     }
 
 
-    public void getElements()
+    public void initialize()
     {
         music = (CheckBox)findViewById(R.id.cMusik);
         krauter = (CheckBox)findViewById(R.id.cKrauter);

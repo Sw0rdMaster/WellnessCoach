@@ -1,4 +1,4 @@
-package com.example.roman.wellnesscoach;
+package com.example.roman.wellnesscoach.Server;
 
 import android.content.Context;
 import android.os.AsyncTask;

@@ -1,4 +1,4 @@
-package com.example.roman.wellnesscoach;
+package com.example.roman.wellnesscoach.Voting;
 
 import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +9,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.RatingBar;
 import android.widget.TextView;
+
+import com.example.roman.wellnesscoach.Voting.VotingBar;
+import com.example.roman.wellnesscoach.R;
 
 import java.util.List;
 

@@ -1,18 +1,25 @@
-package com.example.roman.wellnesscoach;
+package com.example.roman.wellnesscoach.Authentifizierung;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatButton;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.example.roman.wellnesscoach.R;
+import com.example.roman.wellnesscoach.Server.ServerSchnittstelle;
 
 import org.json.JSONObject;
 import org.mindrot.jbcrypt.BCrypt;
 
-public class Login extends Activity {
+public class Login extends AppCompatActivity {
 
     EditText name, password;
     String Name, Password;
@@ -25,6 +32,12 @@ public class Login extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getUser();
+
+    }
+
+    public void getUser()
+    {
         pref = ctx.getSharedPreferences("MyPref", 0);
         editor = pref.edit();
         currentUser = pref.getString("Username", null);
@@ -35,11 +48,12 @@ public class Login extends Activity {
         }
         else
         {
-            Intent i = new Intent(ctx, Overview.class);
+            Intent i = new Intent(ctx, MainWindow.class);
             i.putExtra("name", currentUser);
             startActivity(i);
         }
     }
+
 
     public void main_register(View v){
         Intent registerIntent = new Intent(this, Register.class);
@@ -47,7 +61,7 @@ public class Login extends Activity {
 
     }
 
-    public void main_login(View v){
+    public void loginRequest(View v){
         Name = name.getText().toString();
         Password = password.getText().toString();
         JSONObject myJSON = createLoginJSON(Name);
@@ -55,25 +69,7 @@ public class Login extends Activity {
         {
             @Override
             public void processFinish(String output){
-                System.out.println("Response = " + output);
-
-                if(output.endsWith("\r\n"))
-                {
-                    output = output.substring(0, output.length() - 2);
-                }
-                if (BCrypt.checkpw(Password, output))
-                {
-                    Intent i = new Intent(ctx, Overview.class);
-                    i.putExtra("name", Name);
-
-                    editor.putString("Username", Name);
-                    editor.commit();
-                    startActivity(i);
-                }
-                else
-                {
-                    Toast.makeText(ctx, "Invalid Login", Toast.LENGTH_LONG).show();
-                }
+                checkPassword(output);
             }
         });
         asyncTask.execute(myJSON.toString());
@@ -99,22 +95,24 @@ public class Login extends Activity {
 
     public void checkPassword(String pw)
     {
-        if(pw.endsWith("\r\n"))
-        {
+        if (pw.endsWith("\r\n")) {
             pw = pw.substring(0, pw.length() - 2);
         }
-        if (BCrypt.checkpw(Password, pw))
-        {
-            Intent i = new Intent(ctx, Overview.class);
-            i.putExtra("name", Name);
+        if(!pw.equals("")) {
+                if (BCrypt.checkpw(Password, pw)) {
+                Intent i = new Intent(ctx, MainWindow.class);
+                i.putExtra("name", Name);
 
-            editor.putString("Username", Name);
-            editor.commit();
-            startActivity(i);
+                editor.putString("Username", Name);
+                editor.commit();
+                startActivity(i);
+            } else {
+                Toast.makeText(ctx, "Ungültiger Benutzername/Passwort", Toast.LENGTH_LONG).show();
+            }
         }
         else
         {
-            Toast.makeText(ctx, "Invalid Login", Toast.LENGTH_LONG).show();
+            Toast.makeText(ctx, "Ungültiger Benutzername", Toast.LENGTH_LONG).show();
         }
     }
 

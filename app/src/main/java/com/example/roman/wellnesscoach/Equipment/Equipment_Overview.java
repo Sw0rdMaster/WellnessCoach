@@ -1,4 +1,4 @@
-package com.example.roman.wellnesscoach;
+package com.example.roman.wellnesscoach.Equipment;
 
 import android.app.ListActivity;
 import android.content.Context;
@@ -8,7 +8,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Toast;
+
+import com.example.roman.wellnesscoach.Authentifizierung.MainWindow;
+import com.example.roman.wellnesscoach.R;
+import com.example.roman.wellnesscoach.Server.ServerSchnittstelle;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -113,7 +116,7 @@ public class Equipment_Overview extends ListActivity {
 
     public void backToOverview(View v)
     {
-        Intent goToOverview = new Intent(this, Overview.class);
+        Intent goToOverview = new Intent(this, MainWindow.class);
         startActivity(goToOverview);
     }
 

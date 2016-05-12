@@ -1,9 +1,12 @@
-package com.example.roman.wellnesscoach;
+package com.example.roman.wellnesscoach.Kurvorschlag;
 
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+
+import com.example.roman.wellnesscoach.R;
+import com.example.roman.wellnesscoach.Voting.Voting;
 
 import org.json.JSONArray;
 import org.json.JSONException;

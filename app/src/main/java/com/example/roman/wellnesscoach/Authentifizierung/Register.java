@@ -1,4 +1,4 @@
-package com.example.roman.wellnesscoach;
+package com.example.roman.wellnesscoach.Authentifizierung;
 
 import android.app.Activity;
 import android.content.Context;
@@ -10,7 +10,9 @@ import android.widget.Toast;
 
 import org.json.JSONObject;
 import org.mindrot.jbcrypt.BCrypt;
-import com.example.roman.wellnesscoach.ServerSchnittstelle;
+
+import com.example.roman.wellnesscoach.R;
+import com.example.roman.wellnesscoach.Server.ServerSchnittstelle;
 
 
 public class Register extends Activity {
@@ -28,7 +30,7 @@ public class Register extends Activity {
         password = (EditText) findViewById(R.id.register_password);
     }
 
-    public void register_register(View v){
+    public void registerRequest(View v){
         Name = name.getText().toString();
         Password = password.getText().toString();
         JSONObject myJSON = createRegisterJSON(Name, Password);

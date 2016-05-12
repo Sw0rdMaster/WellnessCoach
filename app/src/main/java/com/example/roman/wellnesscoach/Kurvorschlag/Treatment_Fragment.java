@@ -1,4 +1,4 @@
-package com.example.roman.wellnesscoach;
+package com.example.roman.wellnesscoach.Kurvorschlag;
 
 import android.app.Fragment;
 import android.content.Intent;
@@ -12,6 +12,9 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.example.roman.wellnesscoach.Kurvorschlag.ProposeTreatment;
+import com.example.roman.wellnesscoach.R;
 
 import org.json.JSONObject;
 

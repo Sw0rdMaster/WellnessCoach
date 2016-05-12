@@ -40,7 +40,7 @@
         android:hint="Password" />
 
     <Button
-        android:onClick="register_register"
+        android:onClick="registerRequest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Register"
@@ -50,5 +50,13 @@
         android:layout_alignParentLeft="true"
         android:layout_alignRight="@+id/register_password"
         android:layout_alignEnd="@+id/register_password" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView2"
+        android:src="@drawable/vaporsana_logo"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
