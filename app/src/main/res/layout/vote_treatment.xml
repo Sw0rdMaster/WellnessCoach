@@ -17,6 +17,7 @@
         android:id="@+id/titleButton"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
+        android:backgroundTint="@color/VaporHauptfarbe"
         android:clickable="false" />
 
     <ListView
@@ -39,6 +40,7 @@
             android:layout_below="@+id/list_view"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
+            android:backgroundTint="@color/VaporHauptfarbe"
             android:onClick="voteNext" />
 
         <Button
@@ -48,6 +50,7 @@
             android:id="@+id/button9"
             android:layout_below="@+id/list_view"
             android:layout_alignParentLeft="true"
+            android:backgroundTint="@color/VaporHauptfarbe"
             android:layout_alignParentStart="true" />
     </LinearLayout>
 

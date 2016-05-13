@@ -4,17 +4,22 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.TextView;
 
+import com.example.roman.wellnesscoach.Authentifizierung.MainWindow;
 import com.example.roman.wellnesscoach.R;
 import com.example.roman.wellnesscoach.Voting.Voting;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.w3c.dom.Text;
 
 /**
  * Created by Roman on 28.04.2016.
  */
-public class ProposeTreatment extends FragmentActivity {
+public class ProposeTreatment extends AppCompatActivity {
 
 
     static int treatmentcounter = 0;
@@ -54,6 +59,7 @@ public class ProposeTreatment extends FragmentActivity {
                     transaction.add(R.id.linearPropose, treatmentFragment);
                 }
                 treatmentcounter++;
+                setProgessText(jsonArray.length());
                 transaction.commit();
             }
         }
@@ -68,6 +74,23 @@ public class ProposeTreatment extends FragmentActivity {
         System.out.println("An Voting = " + treatmentString);
         goToVotingIntent.putExtra("JSON", treatmentString);
         startActivity(goToVotingIntent);
+    }
+
+    public void setProgessText(int arrayLength)
+    {
+        TextView progress = (TextView)findViewById(R.id.tProgress);
+        progress.setText("Fortschritt: " + treatmentcounter + " / " + arrayLength);
+    }
+
+    public void backToOverview(View v)
+    {
+        Intent goBack = new Intent(this, MainWindow.class);
+        startActivity(goBack);
+    }
+
+    public void skipTreatment(View v)
+    {
+        onLastResult();
     }
 
 }

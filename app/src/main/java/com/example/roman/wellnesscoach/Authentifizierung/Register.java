@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -15,7 +16,7 @@ import com.example.roman.wellnesscoach.R;
 import com.example.roman.wellnesscoach.Server.ServerSchnittstelle;
 
 
-public class Register extends Activity {
+public class Register extends AppCompatActivity {
 
     EditText name, password;
     String Name, Password;
@@ -45,6 +46,12 @@ public class Register extends Activity {
             }
         });
         asyncTask.execute(myJSON.toString());
+    }
+
+    public void backToLogin(View v)
+    {
+        Intent backToLogin = new Intent(ctx, Login.class);
+        startActivity(backToLogin);
     }
 
     public JSONObject createRegisterJSON(String n, String pw)

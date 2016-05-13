@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -24,7 +25,7 @@ import java.util.ArrayList;
 /**
  * Created by Roman on 09.04.2016.
  */
-public class Equipment_AddElement extends Activity{
+public class Equipment_AddElement extends AppCompatActivity{
     Context ctx=this;
     ArrayAdapter<String> spinnerArrayAdapter;
     ArrayList<Equipment> dampfbadList;
@@ -57,7 +58,7 @@ public class Equipment_AddElement extends Activity{
         getUser();
         initialize();
         spinnerEvent();
-        checkFunctions();
+        //checkFunctions();
         JSONObject json = getAllDevicesJSON();
         asyncTask(json);
 
@@ -123,7 +124,7 @@ public class Equipment_AddElement extends Activity{
         smell = (CheckBox)findViewById(R.id.cDufte);
         sole = (CheckBox)findViewById(R.id.cSole);
 
-        specificDeviceSpinner = (Spinner)findViewById(R.id.spinnerSpecific);
+        //specificDeviceSpinner = (Spinner)findViewById(R.id.spinnerSpecific);
 
         dampfbadList = new ArrayList<>();
         saunaList = new ArrayList<>();
@@ -180,20 +181,13 @@ public class Equipment_AddElement extends Activity{
         try {
             jsonObject = new JSONObject();
             jsonObject.put("Task", "AddDevice");
-            if(specificDeviceSpinner.getSelectedItem().toString().equals(individuell)) {
-                jsonObject.put("Device", equipSpinner.getSelectedItem().toString());
-                jsonObject.put("Name", individuell);
-                jsonObject.put("Musik",  Boolean.toString(music.isChecked()));
-                jsonObject.put("Sole", Boolean.toString(sole.isChecked()));
-                jsonObject.put("Krauter",  Boolean.toString(krauter.isChecked()));
-                jsonObject.put("Smell",  Boolean.toString(smell.isChecked()));
-                jsonObject.put("Light",  Boolean.toString(light.isChecked()));
-            }
-            else
-            {
-                jsonObject.put("Device", equipSpinner.getSelectedItem().toString());
-                jsonObject.put("Name", specificDeviceSpinner.getSelectedItem().toString());
-            }
+            jsonObject.put("Device", equipSpinner.getSelectedItem().toString());
+            jsonObject.put("Name", individuell);
+            jsonObject.put("Musik",  Boolean.toString(music.isChecked()));
+            jsonObject.put("Sole", Boolean.toString(sole.isChecked()));
+            jsonObject.put("Krauter",  Boolean.toString(krauter.isChecked()));
+            jsonObject.put("Smell",  Boolean.toString(smell.isChecked()));
+            jsonObject.put("Light",  Boolean.toString(light.isChecked()));
         }
         catch(Exception e)
         {
@@ -311,10 +305,10 @@ public class Equipment_AddElement extends Activity{
 
                 }
 
-                spinnerArrayAdapter = new ArrayAdapter<String>(Equipment_AddElement.this,
+                /*spinnerArrayAdapter = new ArrayAdapter<String>(Equipment_AddElement.this,
                         android.R.layout.simple_spinner_item, tempArray); //selected item will look like a spinner set from XML
                 spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                specificDeviceSpinner.setAdapter(spinnerArrayAdapter);
+                specificDeviceSpinner.setAdapter(spinnerArrayAdapter);*/
             }
 
             @Override
@@ -324,26 +318,4 @@ public class Equipment_AddElement extends Activity{
         });
     }
 
-    public void pseudoEquipment()
-    {
-        Equipment dampfbad0 = new Equipment("", "Dampfbad");
-
-        Equipment dampfbad1 = new Equipment("Dampfbad SATGL-3000", "Dampfbad");
-        dampfbad1.setColor(true);
-        dampfbad1.setFragrance(true);
-        dampfbad1.setHerbs(true);
-        dampfbad1.setSole(true);
-
-        Equipment dampfbad2 = new Equipment("Dampfbad JEHA-2304", "Dampfbad");
-        dampfbad2.setMusic(true);
-        dampfbad2.setColor(true);
-
-        Equipment indiviual = new Equipment(individuell, "Dampfbad");
-
-        dampfbadList = new ArrayList<>();
-        dampfbadList.add(dampfbad0);
-        dampfbadList.add(dampfbad1);
-        dampfbadList.add(dampfbad2);
-        dampfbadList.add(indiviual);
-    }
 }

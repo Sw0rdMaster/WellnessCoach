@@ -11,11 +11,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Bitte wählen Sie eine Geräte-Kategorie"
+            android:text="Bitte wählen Sie eine \nGeräte-Kategorie"
             android:id="@+id/textView5"
+            android:textColor="@color/VaporZweitfarbe"
             android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="62dp" />
+            android:layout_marginTop="62dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:gravity="center_horizontal" />
     </RelativeLayout>
 
 </LinearLayout>

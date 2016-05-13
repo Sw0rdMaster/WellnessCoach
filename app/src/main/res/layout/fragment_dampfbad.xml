@@ -11,91 +11,89 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Wähle das Dampfbad-Modell aus"
-            android:id="@+id/textView3"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="15dp" />
-
-        <Spinner
-            android:layout_width="128dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:id="@+id/spinnerSpecific"
-            android:entries="@array/equip_list"
-            android:spinnerMode="dropdown"
-            android:layout_below="@+id/textView3"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="20dp">
-        </Spinner>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Verfügt über folgende Funktionen"
+            android:text="Wählen Sie alle Funktionen \nihres Gerätes"
             android:id="@+id/textView4"
-            android:layout_below="@+id/spinnerSpecific"
             android:layout_marginTop="36dp"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_marginBottom="20dp" />
+            android:layout_marginBottom="20dp"
+            android:textColor="@color/VaporZweitfarbe"
+            android:gravity="center_horizontal" />
 
-        <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Musik"
-            android:id="@+id/cMusik"
-            android:layout_below="@+id/textView4"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:checked="false" />
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/textView4">
 
-        <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Farblicht"
-            android:id="@+id/cFarblicht"
-            android:layout_below="@+id/cMusik"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:checked="false" />
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/textView4">
 
-        <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Kräuter"
-            android:id="@+id/cKrauter"
-            android:checked="false"
-            android:layout_below="@+id/textView4"
-            android:layout_alignLeft="@+id/cSole"
-            android:layout_alignStart="@+id/cSole" />
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Farblicht"
+                    android:id="@+id/cFarblicht"
+                    android:checked="false"
+                    android:layout_below="@+id/cKrauter"
+                    android:layout_alignLeft="@+id/cKrauter"
+                    android:textStyle="bold"
+                    android:layout_alignStart="@+id/cKrauter"
+                    android:layout_gravity="center_horizontal" />
 
-        <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Sole"
-            android:id="@+id/cSole"
-            android:layout_alignTop="@+id/cFarblicht"
-            android:layout_alignRight="@+id/textView3"
-            android:layout_alignEnd="@+id/textView3"
-            android:checked="false" />
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Kräuter"
+                    android:id="@+id/cKrauter"
+                    android:checked="false"
+                    android:layout_above="@+id/cFarblicht"
+                    android:textStyle="bold"
+                    android:layout_gravity="center_horizontal" />
 
-        <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Düfte"
-            android:id="@+id/cDufte"
-            android:layout_below="@+id/cFarblicht"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:checked="false" />
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sole"
+                    android:id="@+id/cSole"
+                    android:checked="false"
+                    android:layout_below="@+id/cMusik"
+                    android:layout_alignLeft="@+id/cDufte"
+                    android:textStyle="bold"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_alignStart="@+id/cDufte" />
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Musik"
+                    android:id="@+id/cMusik"
+                    android:checked="false"
+                    android:layout_below="@+id/textView4"
+                    android:layout_alignLeft="@+id/cSole"
+                    android:layout_alignStart="@+id/cSole"
+                    android:layout_gravity="center_horizontal"
+                    android:textStyle="bold" />
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Düfte"
+                    android:id="@+id/cDufte"
+                    android:checked="false"
+                    android:layout_below="@+id/cFarblicht"
+                    android:layout_toLeftOf="@+id/cFarblicht"
+                    android:layout_toStartOf="@+id/cFarblicht"
+                    android:textStyle="bold"
+                    android:layout_gravity="center_horizontal"
+                     />
+
+            </LinearLayout>
+        </RadioGroup>
 
     </RelativeLayout>
 

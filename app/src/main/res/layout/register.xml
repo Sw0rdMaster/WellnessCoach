@@ -10,10 +10,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Register"
+        android:text="Registrieren"
         android:id="@+id/textview"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/VaporZweitfarbe"/>
 
     <EditText
         android:layout_width="wrap_content"
@@ -24,6 +25,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentLeft="true"
+        android:textColorHint="@color/VaporZweitfarbe"
         android:hint="Name" />
 
     <EditText
@@ -37,19 +39,34 @@
         android:layout_alignEnd="@+id/register_name"
         android:layout_alignRight="@+id/register_name"
         android:layout_alignParentLeft="true"
-        android:hint="Password" />
+        android:textColorHint="@color/VaporZweitfarbe"
+        android:hint="Passwort" />
 
     <Button
         android:onClick="registerRequest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Register"
+        android:text="Registrieren"
         android:id="@+id/register_register"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/register_password"
         android:layout_alignParentLeft="true"
         android:layout_alignRight="@+id/register_password"
-        android:layout_alignEnd="@+id/register_password" />
+        android:layout_alignEnd="@+id/register_password"
+        android:backgroundTint="@color/VaporHauptfarbe"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Zurück"
+        android:id="@+id/backButton"
+        android:backgroundTint="@color/VaporHauptfarbe"
+        android:layout_below="@+id/register_register"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:onClick="backToLogin" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -57,6 +74,7 @@
         android:id="@+id/imageView2"
         android:src="@drawable/vaporsana_logo"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        />
 
 </RelativeLayout>

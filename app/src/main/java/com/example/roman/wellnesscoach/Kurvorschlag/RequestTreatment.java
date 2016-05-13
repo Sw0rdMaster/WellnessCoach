@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,7 +26,7 @@ import java.util.ArrayList;
 /**
  * Created by Roman on 12.04.2016.
  */
-public class RequestTreatment extends Activity {
+public class RequestTreatment extends AppCompatActivity {
 
     SharedPreferences pref;
     String currentUser;
@@ -225,21 +226,9 @@ public class RequestTreatment extends Activity {
                 convertView = vi.inflate(R.layout.country_info, null);
 
                 holder = new ViewHolder();
-                //holder.code = (TextView) convertView.findViewById(R.id.code);
                 holder.name = (CheckBox) convertView.findViewById(R.id.checkBox1);
                 convertView.setTag(holder);
 
-                /*holder.name.setOnClickListener(new View.OnClickListener() {
-                    public void onClick(View v) {
-                        CheckBox cb = (CheckBox) v;
-                        Checkbox country = (Checkbox) cb.getTag();
-                        Toast.makeText(getApplicationContext(),
-                                "Clicked on Checkbox: " + cb.getText() +
-                                        " is " + cb.isChecked(),
-                                Toast.LENGTH_LONG).show();
-                        country.setSelected(cb.isChecked());
-                    }
-                });*/
             } else {
                 holder = (ViewHolder) convertView.getTag();
             }

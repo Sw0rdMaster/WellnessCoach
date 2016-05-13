@@ -85,19 +85,28 @@ public class Treatment_Fragment extends Fragment {
             ArrayList<TextView> textList = new ArrayList<>();
 
             TextView a = new TextView(getActivity());
-            a.setText("Temperatur: " + treatmentJSON.getString("Temperatur"));
+            if(!treatmentJSON.getString("Temperatur").equals("false")) {
+                a.setText(getString(R.string.temperatur) + treatmentJSON.getString("Temperatur"));
+                textList.add(a);
+            }
 
             TextView b =  new TextView(getActivity());
-            b.setText("Einsusetzende Kräuter: " + treatmentJSON.getString("Krauter"));
+            if(!treatmentJSON.getString("Krauter").equals("false")) {
+                b.setText(getString(R.string.kräuter) + treatmentJSON.getString("Krauter"));
+                textList.add(b);
+            }
 
             TextView c = new TextView(getActivity());
-            c.setText("Lichtfarbe: " + treatmentJSON.getString("Light"));
+            if(!treatmentJSON.getString("Light").equals("false")) {
+                c.setText(getString(R.string.lichtfarbe) + treatmentJSON.getString("Light"));
+                textList.add(c);
+            }
 
             TextView d = new TextView(getActivity());
-            d.setText("Musikrichtung: " + treatmentJSON.getString("Musik"));
-
-            textList.add(a); textList.add(b);
-            textList.add(c); textList.add(d);
+            if(!treatmentJSON.getString("Musik").equals("false")) {
+                d.setText(getString(R.string.musik) + treatmentJSON.getString("Musik"));
+                textList.add(d);
+            }
 
             addTextlistToLayout(textList);
 
@@ -116,15 +125,13 @@ public class Treatment_Fragment extends Fragment {
     public void addTextlistToLayout(ArrayList<TextView> list)
     {
         for(int i = 0; i < list.size(); i++)
-        {
-            if(list.get(i) != null)
-            {
+            if (list.get(i) != null) {
                 TextView temp = list.get(i);
-                temp.setTextSize(22);
+                temp.setTextColor(getResources().getColor(R.color.VaporZweitfarbe));
+                temp.setTextSize(18);
                 temp.setTypeface(null, Typeface.BOLD);
                 treatDetails.addView(list.get(i));
             }
-        }
     }
 
     public void startTreatmentTimer()

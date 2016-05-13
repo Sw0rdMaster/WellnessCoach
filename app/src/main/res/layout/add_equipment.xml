@@ -5,17 +5,27 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
+        android:layout_height="19dp"></RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <Spinner
             android:layout_width="128dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:id="@+id/spinEquip"
             android:entries="@array/equip_list"
             android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:spinnerMode="dropdown">
+            android:spinnerMode="dropdown"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:background="@color/VaporHauptfarbe">
         </Spinner>
 
         <RelativeLayout
@@ -49,6 +59,7 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:onClick="onEquipConfirmed"
+            android:backgroundTint="@color/VaporHauptfarbe"
             android:nestedScrollingEnabled="false" />
 
     </RelativeLayout>

@@ -56,10 +56,21 @@ public class Voting extends AppCompatActivity{
         try {
             Button titleButton = (Button)findViewById(R.id.titleButton);
             titleButton.setText(jsono.getString("Device"));
-            arrayList.add(new VotingBar(1, "Temperatur " + jsono.getString("Temperatur"), null));
-            arrayList.add(new VotingBar(1, "Licht " + jsono.getString("Light"), null));
-            arrayList.add(new VotingBar(1, "Kräuter " + jsono.getString("Krauter"), null));
-            arrayList.add(new VotingBar(1, "Musik " + jsono.getString("Musik"), null));
+            if(!jsono.getString("Device").equals("false")) {
+                arrayList.add(new VotingBar(1, "Gerät " + jsono.getString("Device"), null));
+            }
+            if(!jsono.getString("Temperatur").equals("false")) {
+                arrayList.add(new VotingBar(1, getString(R.string.temperatur) + "  " + jsono.getString("Temperatur"), null));
+            }
+            if(!jsono.getString("Light").equals("false")) {
+                arrayList.add(new VotingBar(1, getString(R.string.lichtfarbe) +"  " + jsono.getString("Light"), null));
+            }
+            if(!jsono.getString("Krauter").equals("false")) {
+                arrayList.add(new VotingBar(1, getString(R.string.kräuter) + jsono.getString("Krauter"), null));
+            }
+            if(!jsono.getString("Musik").equals("false")) {
+                arrayList.add(new VotingBar(1, getString(R.string.musik) + jsono.getString("Musik"), null));
+            }
 
         }
         catch(Exception e)

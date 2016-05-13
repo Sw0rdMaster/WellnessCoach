@@ -73,6 +73,7 @@ public class ListViewAdapter extends ArrayAdapter<VotingBar> {
         public ViewHolder(View view) {
             ratingBar = (RatingBar) view.findViewById(R.id.rate_img);
             movieName = (TextView) view.findViewById(R.id.text);
+
         }
     }
 }

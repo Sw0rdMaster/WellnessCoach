@@ -20,7 +20,9 @@
             android:text="Geräteinformationen"
             android:id="@+id/textView2"
             android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/VaporZweitfarbe" />
 
         <ListView
             android:layout_width="fill_parent"
@@ -31,6 +33,7 @@
             android:choiceMode="singleChoice"
             android:listSelector="@android:color/darker_gray"
             android:layout_weight="1.54"
+            android:paddingTop="15dp"
             android:id="@android:id/list" />
 
         <RelativeLayout
@@ -46,6 +49,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="false"
                 android:layout_marginBottom="62dp"
+                android:backgroundTint="@color/VaporHauptfarbe"
                 android:onClick="onClickCustomize" />
 
             <Button
@@ -55,6 +59,7 @@
                 android:id="@+id/button6"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentRight="true"
+                android:backgroundTint="@color/VaporHauptfarbe"
                 android:layout_alignParentEnd="true" />
 
             <Button
@@ -64,6 +69,7 @@
                 android:id="@+id/bBack"
                 android:layout_below="@+id/button6"
                 android:layout_centerHorizontal="true"
+                android:backgroundTint="@color/VaporHauptfarbe"
                 android:onClick="backToOverview" />
         </RelativeLayout>
 
