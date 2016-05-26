@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.roman.wellnesscoach.Authentifizierung.MainWindow;
@@ -52,26 +53,39 @@ public class Equipment_Overview extends ListActivity {
             @Override
             public void processFinish(String output){
                 try {
-                    equipment = new ArrayList<>();
-                    System.out.println("Ich bin das JSONArray " +output);
-                    JSONArray jsonArray = new JSONArray(output);
+                    if (!output.equals("No Devices yet\r\n")) {
+                        equipment = new ArrayList<>();
+                        System.out.println("Ich bin das JSONArray " + output);
+                        JSONArray jsonArray = new JSONArray(output);
 
-                    int i;
-                    for(i = 0; i < jsonArray.length(); i++)
+                        int i;
+                        for (i = 0; i < jsonArray.length(); i++) {
+                            JSONObject jsono = jsonArray.getJSONObject(i);
+                            equipment.add(jsono.get("Name").toString());
+                            equipList = getListView();
+                            adapter = new ArrayAdapter<String>(equipList.getContext(), android.R.layout.simple_list_item_1, equipment);
+                            getListView().setAdapter(adapter);
+                            Button removeDeviceButton = (Button) findViewById(R.id.removeButton);
+                            removeDeviceButton.setEnabled(true);
+                            currentDevice();
+                        }
+                    }
+                    else
                     {
-                        JSONObject jsono = jsonArray.getJSONObject(i);
-                        equipment.add(jsono.get("Name").toString());
                         equipList = getListView();
+                        equipment = new ArrayList<>();
+                        equipment.add("Noch kein Gerät registriert");
                         adapter = new ArrayAdapter<String>(equipList.getContext(), android.R.layout.simple_list_item_1, equipment);
                         getListView().setAdapter(adapter);
+
+                        Button removeDeviceButton = (Button) findViewById(R.id.removeButton);
+                        removeDeviceButton.setEnabled(false);
                     }
                 }
                 catch(Exception e)
                 {
                     System.err.print(e.getStackTrace());
                 }
-
-                currentDevice();
             }
         });
         asyncTask.execute(json.toString());
@@ -100,12 +114,6 @@ public class Equipment_Overview extends ListActivity {
         }
 
         return jsonObject;
-    }
-
-    public void onClickAddElement(View v)
-    {
-        equipment.add("Mitsuru");
-        adapter.notifyDataSetChanged();
     }
 
     public void currentDevice()
