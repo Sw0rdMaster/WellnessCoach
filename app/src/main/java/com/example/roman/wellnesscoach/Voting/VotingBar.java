@@ -1,15 +1,17 @@
 package com.example.roman.wellnesscoach.Voting;
 
+import android.text.SpannableStringBuilder;
+
 /**
  * Created by Roman on 22.04.2016.
  */
 public class VotingBar {
 
     private float ratingStar;
-    private String name;
+    private SpannableStringBuilder name;
     private String property;
 
-    public VotingBar(int ratingStar, String name, String country) {
+    public VotingBar(int ratingStar, SpannableStringBuilder name, String country) {
         this.ratingStar = ratingStar;
         this.name = name;
         this.property = country;
@@ -23,11 +25,11 @@ public class VotingBar {
         this.ratingStar = ratingStar;
     }
 
-    public String getName() {
+    public SpannableStringBuilder getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(SpannableStringBuilder name) {
         this.name = name;
     }
 

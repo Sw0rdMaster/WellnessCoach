@@ -5,6 +5,9 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.style.TabStopSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -103,25 +106,25 @@ public class Treatment_Fragment extends Fragment {
 
             TextView a = new TextView(getActivity());
             if(!treatmentJSON.getString("Temperatur").equals("false")) {
-                a.setText(getString(R.string.temperatur) + treatmentJSON.getString("Temperatur"));
+                a.setText(getTabbedString("Temperatur:", treatmentJSON.getString("Temperatur"), 500), TextView.BufferType.SPANNABLE);
                 textList.add(a);
             }
 
             TextView b =  new TextView(getActivity());
             if(!treatmentJSON.getString("Krauter").equals("false")) {
-                b.setText(getString(R.string.kräuter) + treatmentJSON.getString("Krauter"));
+                b.setText(getTabbedString("Kräuter:", treatmentJSON.getString("Krauter"), 500), TextView.BufferType.SPANNABLE);
                 textList.add(b);
             }
 
             TextView c = new TextView(getActivity());
             if(!treatmentJSON.getString("Light").equals("false")) {
-                c.setText(getString(R.string.lichtfarbe) + treatmentJSON.getString("Light"));
+                c.setText(getTabbedString("Lichtfarbe:", treatmentJSON.getString("Light"), 500), TextView.BufferType.SPANNABLE);
                 textList.add(c);
             }
 
             TextView d = new TextView(getActivity());
             if(!treatmentJSON.getString("Musik").equals("false")) {
-                d.setText(getString(R.string.musik) + treatmentJSON.getString("Musik"));
+                d.setText(getTabbedString("Musik:", treatmentJSON.getString("Musik"), 500), TextView.BufferType.SPANNABLE);
                 textList.add(d);
             }
 
@@ -137,6 +140,13 @@ public class Treatment_Fragment extends Fragment {
         {
             System.err.println(e.getMessage());
         }
+    }
+
+    public static SpannableStringBuilder getTabbedString(String a, String b, int tab)
+    {
+        SpannableStringBuilder span = new SpannableStringBuilder(a + "\t" + b);
+        span.setSpan(new TabStopSpan.Standard(tab), 0, span.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE );
+        return span;
     }
 
     public void addTextlistToLayout(ArrayList<TextView> list)

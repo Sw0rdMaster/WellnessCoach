@@ -17,6 +17,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.roman.wellnesscoach.Authentifizierung.MainWindow;
+import com.example.roman.wellnesscoach.Kurvorschlag.Treatment_Fragment;
 import com.example.roman.wellnesscoach.R;
 import com.example.roman.wellnesscoach.Server.ServerSchnittstelle;
 
@@ -81,19 +82,19 @@ public class Voting extends AppCompatActivity{
             Button titleButton = (Button)findViewById(R.id.titleButton);
             titleButton.setText(currentTreatment.getString("Device"));
             if(!currentTreatment.getString("Device").equals("false")) {
-                arrayList.add(new VotingBar(1, "Gerät " + currentTreatment.getString("Device"), "Device"));
+                arrayList.add(new VotingBar(1, Treatment_Fragment.getTabbedString("Gerät:", currentTreatment.getString("Device"), 350), "Device"));
             }
             if(!currentTreatment.getString("Temperatur").equals("false")) {
-                arrayList.add(new VotingBar(1, getString(R.string.temperatur) + "  " + currentTreatment.getString("Temperatur"), "Temperatur"));
+                arrayList.add(new VotingBar(1, Treatment_Fragment.getTabbedString("Temperatur:", currentTreatment.getString("Temperatur"), 350),"Temperatur"));
             }
             if(!currentTreatment.getString("Light").equals("false")) {
-                arrayList.add(new VotingBar(1, getString(R.string.lichtfarbe) +"  " + currentTreatment.getString("Light"), "Light"));
+                arrayList.add(new VotingBar(1, Treatment_Fragment.getTabbedString("Lichtfarbe:", currentTreatment.getString("Light"), 350), "Light"));
             }
             if(!currentTreatment.getString("Krauter").equals("false")) {
-                arrayList.add(new VotingBar(1, getString(R.string.kräuter) + currentTreatment.getString("Krauter"), "Krauter"));
+                arrayList.add(new VotingBar(1, Treatment_Fragment.getTabbedString("Kräuter::", currentTreatment.getString("Krauter"), 350), "Krauter"));
             }
             if(!currentTreatment.getString("Musik").equals("false")) {
-                arrayList.add(new VotingBar(1, getString(R.string.musik) + currentTreatment.getString("Musik"), "Musik"));
+                arrayList.add(new VotingBar(1, Treatment_Fragment.getTabbedString("Musik:", currentTreatment.getString("Musik"), 350), "Musik"));
             }
 
         }
