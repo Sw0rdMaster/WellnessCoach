@@ -31,21 +31,26 @@ public class Register extends AppCompatActivity {
         password = (EditText) findViewById(R.id.register_password);
     }
 
-    public void registerRequest(View v){
+    public void registerRequest(View v) {
         Name = name.getText().toString();
         Password = password.getText().toString();
-        JSONObject myJSON = createRegisterJSON(Name, Password);
-        ServerSchnittstelle asyncTask = new ServerSchnittstelle(new ServerSchnittstelle.AsyncResponse()
+        if (!Name.equals("") && !Password.equals("")) {
+            JSONObject myJSON = createRegisterJSON(Name, Password);
+            ServerSchnittstelle asyncTask = new ServerSchnittstelle(new ServerSchnittstelle.AsyncResponse() {
+                @Override
+                public void processFinish(String output) {
+                    System.out.println(output);
+                    Toast.makeText(ctx, output, Toast.LENGTH_LONG).show();
+                    Intent backToLogin = new Intent(ctx, Login.class);
+                    startActivity(backToLogin);
+                }
+            });
+            asyncTask.execute(myJSON.toString());
+        }
+        else
         {
-            @Override
-            public void processFinish(String output){
-                System.out.println(output);
-                Toast.makeText(ctx, output, Toast.LENGTH_LONG).show();
-                Intent backToLogin = new Intent(ctx, Login.class);
-                startActivity(backToLogin);
-            }
-        });
-        asyncTask.execute(myJSON.toString());
+            Toast.makeText(ctx, "Fehlender Benutzername / Passwort", Toast.LENGTH_LONG).show();
+        }
     }
 
     public void backToLogin(View v)

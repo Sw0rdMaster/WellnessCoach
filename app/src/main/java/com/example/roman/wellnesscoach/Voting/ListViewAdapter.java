@@ -10,7 +10,6 @@ import android.widget.ArrayAdapter;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.example.roman.wellnesscoach.Voting.VotingBar;
 import com.example.roman.wellnesscoach.R;
 
 import java.util.List;
@@ -50,7 +49,7 @@ public class ListViewAdapter extends ArrayAdapter<VotingBar> {
 
         holder.ratingBar.setTag(position);
         holder.ratingBar.setRating(getItem(position).getRatingStar());
-        holder.movieName.setText(getItem(position).getName());
+        holder.property.setText(getItem(position).getName());
 
         return convertView;
     }
@@ -68,11 +67,11 @@ public class ListViewAdapter extends ArrayAdapter<VotingBar> {
 
     private static class ViewHolder {
         private RatingBar ratingBar;
-        private TextView movieName;
+        private TextView property;
 
         public ViewHolder(View view) {
             ratingBar = (RatingBar) view.findViewById(R.id.rate_img);
-            movieName = (TextView) view.findViewById(R.id.text);
+            property = (TextView) view.findViewById(R.id.text);
 
         }
     }

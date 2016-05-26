@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
@@ -13,7 +14,7 @@ import com.example.roman.wellnesscoach.Equipment.Equipment_Overview;
 import com.example.roman.wellnesscoach.Kurvorschlag.RequestTreatment;
 import com.example.roman.wellnesscoach.R;
 
-public class MainWindow extends Activity {
+public class MainWindow extends AppCompatActivity {
 
     String name;
     TextView nameTV;
