@@ -7,13 +7,16 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import com.example.roman.wellnesscoach.Authentifizierung.MainWindow;
 import com.example.roman.wellnesscoach.R;
 import com.example.roman.wellnesscoach.Server.ServerSchnittstelle;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -27,7 +30,9 @@ public class Equipment_Overview extends ListActivity {
     ArrayAdapter<String> adapter;
     SharedPreferences pref;
     String currentUser;
+    ListView equipList;
     SharedPreferences.Editor editor;
+    int currentDevice;
 
 
     @Override
@@ -56,7 +61,8 @@ public class Equipment_Overview extends ListActivity {
                     {
                         JSONObject jsono = jsonArray.getJSONObject(i);
                         equipment.add(jsono.get("Name").toString());
-                        adapter = new ArrayAdapter<String>(getListView().getContext(), android.R.layout.simple_list_item_1, equipment);
+                        equipList = getListView();
+                        adapter = new ArrayAdapter<String>(equipList.getContext(), android.R.layout.simple_list_item_1, equipment);
                         getListView().setAdapter(adapter);
                     }
                 }
@@ -65,6 +71,7 @@ public class Equipment_Overview extends ListActivity {
                     System.err.print(e.getStackTrace());
                 }
 
+                currentDevice();
             }
         });
         asyncTask.execute(json.toString());
@@ -99,6 +106,45 @@ public class Equipment_Overview extends ListActivity {
     {
         equipment.add("Mitsuru");
         adapter.notifyDataSetChanged();
+    }
+
+    public void currentDevice()
+    {
+        equipList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                currentDevice = position;
+            }
+        });
+    }
+
+    public void removeDevice(View v)
+    {
+        System.out.println("Entferne: " + equipList.getItemAtPosition(currentDevice).toString());
+
+        JSONObject jsono = null;
+
+        try{
+            jsono = new JSONObject();
+            jsono.put("Task", "RemoveDevice");
+            jsono.put("User", currentUser);
+            jsono.put("Device", equipList.getItemAtPosition(currentDevice).toString());
+        }
+        catch(JSONException e)
+        {
+
+        }
+
+        ServerSchnittstelle asyncTask = new ServerSchnittstelle(new ServerSchnittstelle.AsyncResponse()
+        {
+            @Override
+            public void processFinish(String output){
+                Intent reloadPage = new Intent(ctx, Equipment_Overview.class);
+                startActivity(reloadPage);
+            }
+        });
+        asyncTask.execute(jsono.toString());
+
     }
 
     public void onClickCustomize(View v)

@@ -51,7 +51,8 @@
             android:layout_below="@+id/list_view"
             android:layout_alignParentLeft="true"
             android:backgroundTint="@color/VaporHauptfarbe"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:onClick="skipVoting" />
     </LinearLayout>
 
 

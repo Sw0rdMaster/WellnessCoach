@@ -1,6 +1,5 @@
 package com.example.roman.wellnesscoach.Kurvorschlag;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -14,7 +13,9 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
+import com.example.roman.wellnesscoach.Authentifizierung.MainWindow;
 import com.example.roman.wellnesscoach.R;
 import com.example.roman.wellnesscoach.Server.ServerSchnittstelle;
 
@@ -33,8 +34,9 @@ public class RequestTreatment extends AppCompatActivity {
     SharedPreferences.Editor editor;
     Context ctx = this;
     ListView mainListView;
+    Spinner aimSpinner;
 
-    ArrayAdapter<Checkbox> listAdapter;
+    ArrayAdapter<CustomCheckbox> listAdapter;
 
     MyCustomAdapter dataAdapter = null;
 
@@ -67,7 +69,7 @@ public class RequestTreatment extends AppCompatActivity {
 
         ServerSchnittstelle asyncTask = new ServerSchnittstelle(new ServerSchnittstelle.AsyncResponse()
         {
-            ArrayList<Checkbox> condList = new ArrayList<>();
+            ArrayList<CustomCheckbox> condList = new ArrayList<>();
             @Override
             public void processFinish(String output){
                 try {
@@ -76,7 +78,7 @@ public class RequestTreatment extends AppCompatActivity {
                     for(i = 0; i < jsonArray.length(); i++)
                     {
                         JSONObject jsono = jsonArray.getJSONObject(i);
-                        condList.add(i, new Checkbox(jsono.getString("Condition"), false));
+                        condList.add(i, new CustomCheckbox(jsono.getString("Condition"), false));
                     }
                 } catch (Exception e)
                 {
@@ -89,7 +91,7 @@ public class RequestTreatment extends AppCompatActivity {
         asyncTask.execute(jsonObject.toString());
     }
 
-    public void fillCondList(ArrayList<Checkbox> conditions)
+    public void fillCondList(ArrayList<CustomCheckbox> conditions)
     {
         //create an ArrayAdaptar from the String Array
         dataAdapter = new MyCustomAdapter(this,
@@ -125,12 +127,14 @@ public class RequestTreatment extends AppCompatActivity {
             jsonObject = new JSONObject();
             jsonObject.put("Task", "Treatment");
             jsonObject.put("Username", currentUser);
+            jsonObject.put("Aim", aimSpinner.getSelectedItem());
 
-            ArrayList<Checkbox> checkBoxList = dataAdapter.countryList;
+
+            ArrayList<CustomCheckbox> checkBoxList = dataAdapter.countryList;
 
             for(int i = 0; i < checkBoxList.size(); i++)
             {
-                Checkbox x = checkBoxList.get(i);
+                CustomCheckbox x = checkBoxList.get(i);
                 jsonObject.put(x.getName(), Boolean.toString(x.isSelected()));
             }
         }
@@ -148,6 +152,12 @@ public class RequestTreatment extends AppCompatActivity {
         pref = ctx.getSharedPreferences("MyPref", 0);
         editor = pref.edit();
         currentUser = pref.getString("Username", null);
+    }
+
+    public void backToOverview(View v)
+    {
+        Intent back = new Intent(ctx, MainWindow.class);
+        startActivity(back);
     }
 
     public void getTreamentAimFromServer()
@@ -191,7 +201,7 @@ public class RequestTreatment extends AppCompatActivity {
 
     public void fillAimList(ArrayList<String> aims)
     {
-        Spinner aimSpinner = (Spinner)findViewById(R.id.sAimSpinner);
+        aimSpinner = (Spinner)findViewById(R.id.sAimSpinner);
         ArrayAdapter<String> spinnerArrayAdapter;
         spinnerArrayAdapter = new ArrayAdapter<String>(RequestTreatment.this,
                 android.R.layout.simple_spinner_item, aims); //selected item will look like a spinner set from XML
@@ -199,14 +209,14 @@ public class RequestTreatment extends AppCompatActivity {
         aimSpinner.setAdapter(spinnerArrayAdapter);
     }
 
-    private class MyCustomAdapter extends ArrayAdapter<Checkbox> {
+    private class MyCustomAdapter extends ArrayAdapter<CustomCheckbox> {
 
-        private ArrayList<Checkbox> countryList;
+        private ArrayList<CustomCheckbox> countryList;
 
         public MyCustomAdapter(Context context, int textViewResourceId,
-                               ArrayList<Checkbox> countryList) {
+                               ArrayList<CustomCheckbox> countryList) {
             super(context, textViewResourceId, countryList);
-            this.countryList = new ArrayList<Checkbox>();
+            this.countryList = new ArrayList<CustomCheckbox>();
             this.countryList.addAll(countryList);
         }
 
@@ -229,11 +239,21 @@ public class RequestTreatment extends AppCompatActivity {
                 holder.name = (CheckBox) convertView.findViewById(R.id.checkBox1);
                 convertView.setTag(holder);
 
+
             } else {
                 holder = (ViewHolder) convertView.getTag();
             }
 
-            Checkbox country = countryList.get(position);
+            holder.name.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    CheckBox cb = (CheckBox) v ;
+                    CustomCheckbox country = (CustomCheckbox) cb.getTag();
+                    country.setSelected(cb.isChecked());
+                }
+            });
+
+            CustomCheckbox country = countryList.get(position);
             //holder.code.setText(" (" + country.getCode() + ")");
             holder.name.setText(country.getName());
             holder.name.setChecked(country.isSelected());
@@ -246,12 +266,12 @@ public class RequestTreatment extends AppCompatActivity {
     }
 
 
-    private class Checkbox {
+    private class CustomCheckbox {
 
         String name = null;
         boolean selected = false;
 
-        public Checkbox(String name, boolean selected) {
+        public CustomCheckbox(String name, boolean selected) {
             super();
             this.name = name;
             this.selected = selected;

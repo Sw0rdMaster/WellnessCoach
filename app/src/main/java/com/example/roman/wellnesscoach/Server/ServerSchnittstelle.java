@@ -18,7 +18,7 @@ import java.net.URL;
  * Created by Roman on 10.04.2016.
  */
 public class ServerSchnittstelle extends AsyncTask<String, String, String>{
-    String URL_String = "http://10.0.2.2:8080/WebHelloWorld/NameServlet";
+    String URL_String = "http://10.3.96.166:8080/WellnessCoachServer/NameServlet";
     String data = "";
     AsyncResponse delegate = null;
 

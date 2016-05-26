@@ -33,6 +33,12 @@ public class MainWindow extends Activity {
     {
         nameTV = (TextView) findViewById(R.id.home_name);
         name = getIntent().getStringExtra("name");
+
+        pref = ctx.getSharedPreferences("MyPref", 0);
+        if(name == null)
+        {
+            name = pref.getString("Username", null);
+        }
         nameTV.setText("Welcome "+name);
     }
 

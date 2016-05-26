@@ -22,78 +22,17 @@
             android:textColor="@color/VaporZweitfarbe"
             android:gravity="center_horizontal" />
 
-        <RadioGroup
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/textView4">
 
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@+id/textView4">
-
-                <CheckBox
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Farblicht"
-                    android:id="@+id/cFarblicht"
-                    android:checked="false"
-                    android:layout_below="@+id/cKrauter"
-                    android:layout_alignLeft="@+id/cKrauter"
-                    android:textStyle="bold"
-                    android:layout_alignStart="@+id/cKrauter"
-                    android:layout_gravity="center_horizontal" />
-
-                <CheckBox
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Kräuter"
-                    android:id="@+id/cKrauter"
-                    android:checked="false"
-                    android:layout_above="@+id/cFarblicht"
-                    android:textStyle="bold"
-                    android:layout_gravity="center_horizontal" />
-
-                <CheckBox
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Sole"
-                    android:id="@+id/cSole"
-                    android:checked="false"
-                    android:layout_below="@+id/cMusik"
-                    android:layout_alignLeft="@+id/cDufte"
-                    android:textStyle="bold"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_alignStart="@+id/cDufte" />
-
-                <CheckBox
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Musik"
-                    android:id="@+id/cMusik"
-                    android:checked="false"
-                    android:layout_below="@+id/textView4"
-                    android:layout_alignLeft="@+id/cSole"
-                    android:layout_alignStart="@+id/cSole"
-                    android:layout_gravity="center_horizontal"
-                    android:textStyle="bold" />
-
-                <CheckBox
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Düfte"
-                    android:id="@+id/cDufte"
-                    android:checked="false"
-                    android:layout_below="@+id/cFarblicht"
-                    android:layout_toLeftOf="@+id/cFarblicht"
-                    android:layout_toStartOf="@+id/cFarblicht"
-                    android:textStyle="bold"
-                    android:layout_gravity="center_horizontal"
-                     />
-
-            </LinearLayout>
-        </RadioGroup>
+            <ListView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/lEigenschaften" />
+        </LinearLayout>
 
     </RelativeLayout>
 

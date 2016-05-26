@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.roman.wellnesscoach.Authentifizierung.MainWindow;
 import com.example.roman.wellnesscoach.Kurvorschlag.ProposeTreatment;
 import com.example.roman.wellnesscoach.R;
 
@@ -54,6 +55,22 @@ public class Treatment_Fragment extends Fragment {
         onEndPauseClick();
         // Inflate the layout for this fragment
         return myFragmentView;
+    }
+
+    @Override
+    public void onPause()
+    {
+        super.onPause();
+        System.out.println("OnPause is Called!");
+        if(tTimer != null) {
+            tTimer.cancel();
+            tTimer = null;
+        }
+        if(pTimer != null)
+        {
+            pTimer.cancel();
+            pTimer = null;
+        }
     }
 
     public void initializeElements()
@@ -150,6 +167,7 @@ public class Treatment_Fragment extends Fragment {
                     public void onFinish()
                     {
                         cancel();
+                        tTimer = null;
                         treatmentTimer.setText("Fertig");
                         Button fertigButton = (Button)myFragmentView.findViewById(R.id.bFertig);
                         fertigButton.setEnabled(false);
@@ -182,6 +200,8 @@ public class Treatment_Fragment extends Fragment {
             @Override
             public void onFinish()
             {
+                cancel();
+                pTimer = null;
                 Intent nextTreatment = new Intent(getActivity(), ProposeTreatment.class);
                 nextTreatment.putExtra("JSON", ProposeTreatment.treatmentString);
                 nextTreatment.putExtra("Counter", ProposeTreatment.treatmentcounter);
@@ -217,7 +237,7 @@ public class Treatment_Fragment extends Fragment {
             String hms = String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(millis),
                     TimeUnit.MILLISECONDS.toMinutes(millis) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis)),
                     TimeUnit.MILLISECONDS.toSeconds(millis) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
-
+            System.out.println("Timer = " + hms);
             targetView.setText(hms);
 
         }

@@ -42,9 +42,9 @@
 
                 <include android:id="@+id/include0" layout="@layout/fragment_empty" />
                 <include android:id="@+id/include1" layout="@layout/fragment_dampfbad" />
-                <include android:id="@+id/include2" layout="@layout/fragment_whirlpool" />
-                <include android:id="@+id/include3" layout="@layout/fragment_whirlpool" />
-                <include android:id="@+id/include4" layout="@layout/fragment_whirlpool" />
+                <include android:id="@+id/include2" layout="@layout/fragment_dampfbad" />
+                <include android:id="@+id/include3" layout="@layout/fragment_dampfbad" />
+                <include android:id="@+id/include4" layout="@layout/fragment_dampfbad" />
 
             </ViewFlipper>
 

@@ -1,18 +1,27 @@
 package com.example.roman.wellnesscoach.Voting;
 
+import android.annotation.SuppressLint;
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Movie;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.example.roman.wellnesscoach.Authentifizierung.MainWindow;
 import com.example.roman.wellnesscoach.R;
+import com.example.roman.wellnesscoach.Server.ServerSchnittstelle;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -28,6 +37,12 @@ public class Voting extends AppCompatActivity{
     private RelativeLayout myLayout;
     private int treatmentCounter;
     private String treatmentString;
+    private JSONObject currentTreatment;
+
+    SharedPreferences pref;
+    String currentUser;
+    SharedPreferences.Editor editor;
+    Context ctx = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +51,8 @@ public class Voting extends AppCompatActivity{
         listView = (ListView)findViewById(R.id.list_view);
         treatmentString = getIntent().getExtras().getString("JSON", "");
         treatmentCounter = getIntent().getExtras().getInt("Counter", 0);
+
+        getUser();
 
         myLayout = (RelativeLayout)findViewById(R.id.votingLayout);
 
@@ -50,26 +67,33 @@ public class Voting extends AppCompatActivity{
 
     }
 
+    public void getUser()
+    {
+        pref = ctx.getSharedPreferences("MyPref", 0);
+        editor = pref.edit();
+        currentUser = pref.getString("Username", null);
+    }
 
-    public void createTable(JSONObject jsono) {
+
+    public void createTable() {
 
         try {
             Button titleButton = (Button)findViewById(R.id.titleButton);
-            titleButton.setText(jsono.getString("Device"));
-            if(!jsono.getString("Device").equals("false")) {
-                arrayList.add(new VotingBar(1, "Gerät " + jsono.getString("Device"), null));
+            titleButton.setText(currentTreatment.getString("Device"));
+            if(!currentTreatment.getString("Device").equals("false")) {
+                arrayList.add(new VotingBar(1, "Gerät " + currentTreatment.getString("Device"), "Device"));
             }
-            if(!jsono.getString("Temperatur").equals("false")) {
-                arrayList.add(new VotingBar(1, getString(R.string.temperatur) + "  " + jsono.getString("Temperatur"), null));
+            if(!currentTreatment.getString("Temperatur").equals("false")) {
+                arrayList.add(new VotingBar(1, getString(R.string.temperatur) + "  " + currentTreatment.getString("Temperatur"), "Temperatur"));
             }
-            if(!jsono.getString("Light").equals("false")) {
-                arrayList.add(new VotingBar(1, getString(R.string.lichtfarbe) +"  " + jsono.getString("Light"), null));
+            if(!currentTreatment.getString("Light").equals("false")) {
+                arrayList.add(new VotingBar(1, getString(R.string.lichtfarbe) +"  " + currentTreatment.getString("Light"), "Light"));
             }
-            if(!jsono.getString("Krauter").equals("false")) {
-                arrayList.add(new VotingBar(1, getString(R.string.kräuter) + jsono.getString("Krauter"), null));
+            if(!currentTreatment.getString("Krauter").equals("false")) {
+                arrayList.add(new VotingBar(1, getString(R.string.kräuter) + currentTreatment.getString("Krauter"), "Krauter"));
             }
-            if(!jsono.getString("Musik").equals("false")) {
-                arrayList.add(new VotingBar(1, getString(R.string.musik) + jsono.getString("Musik"), null));
+            if(!currentTreatment.getString("Musik").equals("false")) {
+                arrayList.add(new VotingBar(1, getString(R.string.musik) + currentTreatment.getString("Musik"), "Musik"));
             }
 
         }
@@ -79,13 +103,16 @@ public class Voting extends AppCompatActivity{
         }
     }
 
+
+
     private void setLisData(String treatment) {
 
         arrayList = new ArrayList<>();
 
         try {
             JSONArray jsonArray = new JSONArray(treatment);
-            createTable(jsonArray.getJSONObject(treatmentCounter));
+            currentTreatment = jsonArray.getJSONObject(treatmentCounter);
+            createTable();
         }
         catch(Exception e)
         {
@@ -93,6 +120,65 @@ public class Voting extends AppCompatActivity{
         }
 
 
+    }
+
+    public float getRating(String searchFor)
+    {
+        System.out.println("Adapterlänge = " + adapter.getCount());
+        for(int i = 0; i < adapter.getCount(); i++)
+        {
+            VotingBar temp = adapter.getItem(i);
+            if(searchFor.equals(temp.getProperty()))
+            {
+                return temp.getRatingStar();
+            }
+        }
+        return 0;
+    }
+
+    public JSONObject fillVotingJSON(String property, JSONObject json)
+    {
+        try{
+            json.put(property, currentTreatment.getString(property));
+            json.put(currentTreatment.getString(property), getRating(property));
+        }
+        catch(JSONException e)
+        {
+            System.err.println("JSONException");
+            System.err.println(e.getMessage());
+        }
+        return json;
+    }
+
+    public void sendVotingToServer()
+    {
+        JSONObject jsonObject = null;
+
+        try {
+            jsonObject = new JSONObject();
+            jsonObject.put("Task", "Voting");
+            jsonObject.put("User", currentUser);
+
+            jsonObject = fillVotingJSON("Device", jsonObject);
+            jsonObject = fillVotingJSON("Temperatur", jsonObject);
+            jsonObject = fillVotingJSON("Light", jsonObject);
+            jsonObject = fillVotingJSON("Krauter", jsonObject);
+            jsonObject = fillVotingJSON("Musik", jsonObject);
+        }
+        catch(Exception e)
+        {
+            System.err.println("JSONException");
+            System.err.println(e.getMessage());
+        }
+
+        ServerSchnittstelle asyncTask = new ServerSchnittstelle(new ServerSchnittstelle.AsyncResponse()
+        {
+            @Override
+            public void processFinish(String output){
+
+            }
+        });
+        asyncTask.execute(jsonObject.toString());
     }
 
     public boolean lastVote()
@@ -114,6 +200,7 @@ public class Voting extends AppCompatActivity{
     public void voteNext(View v)
     {
         treatmentCounter++;
+        sendVotingToServer();
 
         if(lastVote())
         {
@@ -127,5 +214,11 @@ public class Voting extends AppCompatActivity{
             Intent backToOverview = new Intent(this, MainWindow.class);
             startActivity(backToOverview);
         }
+    }
+
+    public void skipVoting(View v)
+    {
+        Intent goBack = new Intent(this, MainWindow.class);
+        startActivity(goBack);
     }
 }

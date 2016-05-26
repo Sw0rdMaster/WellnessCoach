@@ -7,12 +7,12 @@ public class VotingBar {
 
     private float ratingStar;
     private String name;
-    private String country;
+    private String property;
 
     public VotingBar(int ratingStar, String name, String country) {
         this.ratingStar = ratingStar;
         this.name = name;
-        this.country = country;
+        this.property = country;
     }
 
     public float getRatingStar() {
@@ -31,11 +31,11 @@ public class VotingBar {
         this.name = name;
     }
 
-    public String getCountry() {
-        return country;
+    public String getProperty() {
+        return property;
     }
 
-    public void setCountry(String country) {
-        this.country = country;
+    public void setProperty(String country) {
+        this.property = country;
     }
 }

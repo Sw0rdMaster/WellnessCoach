@@ -1,15 +1,18 @@
 package com.example.roman.wellnesscoach.Equipment;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
@@ -17,7 +20,6 @@ import android.widget.ViewFlipper;
 import com.example.roman.wellnesscoach.R;
 import com.example.roman.wellnesscoach.Server.ServerSchnittstelle;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -27,28 +29,17 @@ import java.util.ArrayList;
  */
 public class Equipment_AddElement extends AppCompatActivity{
     Context ctx=this;
-    ArrayAdapter<String> spinnerArrayAdapter;
-    ArrayList<Equipment> dampfbadList;
-    ArrayList<Equipment> saunaList;
-    ArrayList<Equipment> whirlpoolList;
-    ArrayList<Equipment> hotSpringList;
     SharedPreferences pref;
     String currentUser;
     SharedPreferences.Editor editor;
 
-    ArrayList<Equipment> equipList;
     //String[] tempArray = null;
     String individuell = "Individuell";
 
 
-    CheckBox music;
-    CheckBox krauter;
-    CheckBox light;
-    CheckBox smell;
-    CheckBox sole;
-
     Spinner equipSpinner;
-    Spinner specificDeviceSpinner;
+
+    MyCustomAdapter dataAdapter = null;
 
 
     @Override
@@ -56,108 +47,17 @@ public class Equipment_AddElement extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_equipment);
         getUser();
-        initialize();
         spinnerEvent();
-        //checkFunctions();
-        JSONObject json = getAllDevicesJSON();
-        asyncTask(json);
+        fillFeatureList();
 
     }
 
-    public void asyncTask(JSONObject json)
-    {
-        ServerSchnittstelle asyncTask = new ServerSchnittstelle(new ServerSchnittstelle.AsyncResponse()
-        {
-            @Override
-            public void processFinish(String output){
-                try {
-                    JSONArray jsonArray = new JSONArray(output);
-
-                    int i;
-                    for(i = 0; i < jsonArray.length(); i++)
-                    {
-
-                        JSONObject jsono = jsonArray.getJSONObject(i);
-                        Equipment equipment = new Equipment(jsono.get("Name").toString(), jsono.get("Device").toString());
-                        equipment.setMusic(Boolean.parseBoolean(jsono.get("Musik").toString()));
-                        equipment.setSole(Boolean.parseBoolean(jsono.get("Sole").toString()));
-                        equipment.setSole(Boolean.parseBoolean(jsono.get("Light").toString()));
-                        equipment.setSole(Boolean.parseBoolean(jsono.get("Krauter").toString()));
-                        equipment.setSole(Boolean.parseBoolean(jsono.get("Smell").toString()));
-
-                        switch(jsono.get("Device").toString())
-                        {
-                            case "Dampfbad":    dampfbadList.add(equipment);    break;
-                            case "Sauna":       saunaList.add(equipment);       break;
-                            case "Whirlpool":   whirlpoolList.add(equipment);   break;
-                            case "Hotspring":   hotSpringList.add(equipment);   break;
-                            default:
-                                System.out.println("Ich bin im Default gelandet");
-                        }
-
-
-                    }
-                }
-                catch(Exception e)
-                {
-                    System.err.print(e.getStackTrace());
-                }
-
-            }
-        });
-        asyncTask.execute(json.toString());
-    }
 
     public void getUser()
     {
         pref = ctx.getSharedPreferences("MyPref", 0);
         editor = pref.edit();
         currentUser = pref.getString("Username", null);
-    }
-
-
-    public void initialize()
-    {
-        music = (CheckBox)findViewById(R.id.cMusik);
-        krauter = (CheckBox)findViewById(R.id.cKrauter);
-        light = (CheckBox)findViewById(R.id.cFarblicht);
-        smell = (CheckBox)findViewById(R.id.cDufte);
-        sole = (CheckBox)findViewById(R.id.cSole);
-
-        //specificDeviceSpinner = (Spinner)findViewById(R.id.spinnerSpecific);
-
-        dampfbadList = new ArrayList<>();
-        saunaList = new ArrayList<>();
-        whirlpoolList = new ArrayList<>();
-        hotSpringList = new ArrayList<>();
-    }
-
-    public JSONObject getAllDevicesJSON()
-    {
-        JSONObject jsonObject = null;
-
-        try {
-            jsonObject = new JSONObject();
-            jsonObject.put("Task", "GetAllDevices");
-        }
-        catch(Exception e)
-        {
-            System.err.println("JSONException");
-            System.err.println(e.getMessage());
-        }
-
-        return jsonObject;
-    }
-
-    public String[] listToArray(ArrayList<Equipment> a)
-    {
-        String[] temp = new String[a.size()];
-        for(int i = 0; i < a.size(); i++)
-        {
-            Equipment b = a.get(i);
-            temp[i] = b.getArticleName();
-        }
-        return temp;
     }
 
     public void onEquipConfirmed(View v)
@@ -181,13 +81,16 @@ public class Equipment_AddElement extends AppCompatActivity{
         try {
             jsonObject = new JSONObject();
             jsonObject.put("Task", "AddDevice");
+            jsonObject.put("User", currentUser);
             jsonObject.put("Device", equipSpinner.getSelectedItem().toString());
-            jsonObject.put("Name", individuell);
-            jsonObject.put("Musik",  Boolean.toString(music.isChecked()));
-            jsonObject.put("Sole", Boolean.toString(sole.isChecked()));
-            jsonObject.put("Krauter",  Boolean.toString(krauter.isChecked()));
-            jsonObject.put("Smell",  Boolean.toString(smell.isChecked()));
-            jsonObject.put("Light",  Boolean.toString(light.isChecked()));
+
+            ArrayList<CustomCheckbox> checkBoxList = dataAdapter.countryList;
+
+            for(int i = 0; i < checkBoxList.size(); i++)
+            {
+                CustomCheckbox x = checkBoxList.get(i);
+                jsonObject.put(stringToFunction(x.getName()), Boolean.toString(x.isSelected()));
+            }
         }
         catch(Exception e)
         {
@@ -198,77 +101,31 @@ public class Equipment_AddElement extends AppCompatActivity{
         return jsonObject;
     }
 
-    public ArrayList<Equipment> concatenate()
+    public String stringToFunction(String a)
     {
-        //TODO
+        if(a.contains("Kräuter"))
+        {
+            return "Krauter";
+        }
+        if(a.contains("Licht"))
+        {
+            return "Licht";
+        }
+        if(a.contains("Musik"))
+        {
+            return "Musik";
+        }
+        if(a.contains("Sole"))
+        {
+            return "Sole";
+        }
+        if(a.contains("Düfte"))
+        {
+            return "Dufte";
+        }
         return null;
     }
 
-    public void checkFunctions()
-    {
-
-        specificDeviceSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Boolean bool = false;
-                Equipment temp = null;
-                Object o = parent.getSelectedItem();
-                String selected = o.toString();
-                int i = 0;
-                while (bool == false) {
-
-
-                    if (selected.equals(individuell) || selected.equals("")) {
-                        music.setChecked(false);
-                        music.setClickable(true);
-
-                        krauter.setChecked(false);
-                        krauter.setClickable(true);
-
-                        light.setChecked(false);
-                        light.setClickable(true);
-
-                        smell.setChecked(false);
-                        smell.setClickable(true);
-
-                        sole.setChecked(false);
-                        sole.setClickable(true);
-
-                        bool = true;
-                    } else {
-                        if (dampfbadList.get(i).getArticleName().equals(selected)) {
-                            temp = dampfbadList.get(i);
-
-                            music.setChecked(temp.isMusic());
-                            music.setClickable(false);
-
-                            krauter.setChecked(temp.isHerbs());
-                            krauter.setClickable(false);
-
-                            light.setChecked(temp.isColor());
-                            light.setClickable(false);
-
-                            smell.setChecked(temp.isFragrance());
-                            smell.setClickable(false);
-
-                            sole.setChecked(temp.isSole());
-                            sole.setClickable(false);
-
-                            bool = true;
-
-                        } else {
-                            i++;
-                        }
-                    }
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-    }
 
     public void spinnerEvent()
     {
@@ -280,27 +137,21 @@ public class Equipment_AddElement extends AppCompatActivity{
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Object o = parent.getSelectedItem();
-                String[] tempArray = null;
                 switch (o.toString()) {
                     case "":
                         vf.setDisplayedChild(0);
-                        tempArray = new String[0];
                         break;
                     case "Dampfbad":
                         vf.setDisplayedChild(1);
-                        tempArray = listToArray(dampfbadList);
                         break;
                     case "Hotspring":
-                        vf.setDisplayedChild(2);
-                        tempArray = listToArray(hotSpringList);
+                        vf.setDisplayedChild(1);
                         break;
                     case "Sauna":
-                        vf.setDisplayedChild(3);
-                        tempArray = listToArray(saunaList);
+                        vf.setDisplayedChild(1);
                         break;
                     case "Whirlpool":
-                        vf.setDisplayedChild(4);
-                        tempArray = listToArray(whirlpoolList);
+                        vf.setDisplayedChild(1);
                         break;
 
                 }
@@ -316,6 +167,103 @@ public class Equipment_AddElement extends AppCompatActivity{
 
             }
         });
+    }
+
+    public void fillFeatureList()
+    {
+        ArrayList<CustomCheckbox> featureList = new ArrayList<>();
+        featureList.add(0, new CustomCheckbox("Lichttherapie", false));
+        featureList.add(1, new CustomCheckbox("Kräuter \n(Können für ihr Gerät Kräuter genutzt werden?)", false));
+        featureList.add(2, new CustomCheckbox("Musik", false));
+        featureList.add(3, new CustomCheckbox("Sole", false));
+        featureList.add(4, new CustomCheckbox("Düfte", false));
+        dataAdapter = new MyCustomAdapter(this, R.layout.country_info, featureList);
+
+        ListView fList = (ListView)findViewById(R.id.lEigenschaften);
+        fList.setAdapter(dataAdapter);
+    }
+
+    private class MyCustomAdapter extends ArrayAdapter<CustomCheckbox> {
+
+        private ArrayList<CustomCheckbox> countryList;
+
+        public MyCustomAdapter(Context context, int textViewResourceId,
+                               ArrayList<CustomCheckbox> countryList) {
+            super(context, textViewResourceId, countryList);
+            this.countryList = new ArrayList<CustomCheckbox>();
+            this.countryList.addAll(countryList);
+        }
+
+        private class ViewHolder {
+            CheckBox name;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+
+            ViewHolder holder = null;
+            Log.v("ConvertView", String.valueOf(position));
+
+            if (convertView == null) {
+                LayoutInflater vi = (LayoutInflater) getSystemService(
+                        Context.LAYOUT_INFLATER_SERVICE);
+                convertView = vi.inflate(R.layout.country_info, null);
+
+                holder = new ViewHolder();
+                holder.name = (CheckBox) convertView.findViewById(R.id.checkBox1);
+                convertView.setTag(holder);
+
+            } else {
+                holder = (ViewHolder) convertView.getTag();
+            }
+
+            holder.name.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    CheckBox cb = (CheckBox) v ;
+                    CustomCheckbox country = (CustomCheckbox) cb.getTag();
+                    country.setSelected(cb.isChecked());
+                }
+            });
+
+            CustomCheckbox country = countryList.get(position);
+            //holder.code.setText(" (" + country.getCode() + ")");
+            holder.name.setText(country.getName());
+            holder.name.setChecked(country.isSelected());
+            holder.name.setTag(country);
+
+            return convertView;
+
+        }
+
+    }
+
+
+    private class CustomCheckbox {
+
+        String name = null;
+        boolean selected = false;
+
+        public CustomCheckbox(String name, boolean selected) {
+            super();
+            this.name = name;
+            this.selected = selected;
+        }
+
+        public String getName() {
+            return name;
+        }
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public boolean isSelected() {
+            return selected;
+        }
+        public void setSelected(boolean selected) {
+            this.selected = selected;
+        }
+
     }
 
 }

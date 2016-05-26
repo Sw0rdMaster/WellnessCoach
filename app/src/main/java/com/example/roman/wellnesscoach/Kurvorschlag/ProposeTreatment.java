@@ -24,6 +24,7 @@ public class ProposeTreatment extends AppCompatActivity {
 
     static int treatmentcounter = 0;
     static String treatmentString;
+    FragmentTransaction transaction;
 
 
     @Override
@@ -40,7 +41,7 @@ public class ProposeTreatment extends AppCompatActivity {
 
     public void createTreatment(String input)
     {
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction = getFragmentManager().beginTransaction();
         try {
             JSONArray jsonArray = new JSONArray(input);
             int firstFragment = 0;
@@ -70,6 +71,8 @@ public class ProposeTreatment extends AppCompatActivity {
     }
 
     public void onLastResult() {
+
+
         Intent goToVotingIntent = new Intent(this, Voting.class);
         System.out.println("An Voting = " + treatmentString);
         goToVotingIntent.putExtra("JSON", treatmentString);
