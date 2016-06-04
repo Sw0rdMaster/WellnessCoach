@@ -64,12 +64,51 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="320dp">
+        android:layout_height="220dp">
 
         <ListView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:id="@+id/conditionList"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="44dp" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Geben Sie eine Zeitdauer an:"
+            android:id="@+id/textView"
+            android:paddingTop="10dp"
+            android:textColor="@color/VaporZweitfarbe"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:gravity="center_horizontal" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tKurziel"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" >
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:id="@+id/timeSpinner"
+            android:spinnerMode="dropdown"
+            android:background="@color/VaporHauptfarbe"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />

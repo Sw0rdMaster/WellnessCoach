@@ -22,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Kur Starten"
-        android:id="@+id/button"
+        android:id="@+id/BKurButton"
         android:layout_marginTop="48dp"
         android:width="350dp"
         android:layout_below="@+id/home_name"
@@ -40,7 +40,7 @@
         android:layout_alignParentEnd="true"
         android:backgroundTint="@color/VaporHauptfarbe"
         android:onClick="onClickEquipment"
-        android:layout_below="@+id/button" />
+        android:layout_below="@+id/BKurButton" />
 
     <Button
         android:layout_width="wrap_content"

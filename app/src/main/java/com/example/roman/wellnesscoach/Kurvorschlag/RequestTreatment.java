@@ -23,6 +23,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Roman on 12.04.2016.
@@ -35,6 +36,7 @@ public class RequestTreatment extends AppCompatActivity {
     Context ctx = this;
     ListView mainListView;
     Spinner aimSpinner;
+    Spinner timeSpinner;
 
     ArrayAdapter<CustomCheckbox> listAdapter;
 
@@ -48,6 +50,7 @@ public class RequestTreatment extends AppCompatActivity {
         //Generate list View from ArrayList
         getCondListFromServer();
         getTreamentAimFromServer();
+        setTimerange();
 
         //checkButtonClick();
 
@@ -128,6 +131,7 @@ public class RequestTreatment extends AppCompatActivity {
             jsonObject.put("Task", "Treatment");
             jsonObject.put("Username", currentUser);
             jsonObject.put("Aim", aimSpinner.getSelectedItem());
+            jsonObject.put("Time", timeSpinner.getSelectedItem());
 
 
             ArrayList<CustomCheckbox> checkBoxList = dataAdapter.countryList;
@@ -263,6 +267,23 @@ public class RequestTreatment extends AppCompatActivity {
 
         }
 
+    }
+
+    public void setTimerange()
+    {
+        List<String> spinnerArray =  new ArrayList<String>();
+
+        for(int i = 1; i <= 24; i++)
+        {
+            spinnerArray.add(Integer.toString(i*5));
+        }
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                this, android.R.layout.simple_spinner_item, spinnerArray);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        timeSpinner = (Spinner) findViewById(R.id.timeSpinner);
+        timeSpinner.setAdapter(adapter);
     }
 
 
