@@ -117,13 +117,13 @@ public class Treatment_Fragment extends Fragment {
             }
 
             TextView c = new TextView(getActivity());
-            if(!treatmentJSON.getString("Light").equals("false")) {
+            if(!treatmentJSON.getString("Light").equals("Ohne")) {
                 c.setText(getTabbedString("Lichtfarbe:", treatmentJSON.getString("Light"), 500), TextView.BufferType.SPANNABLE);
                 textList.add(c);
             }
 
             TextView d = new TextView(getActivity());
-            if(!treatmentJSON.getString("Musik").equals("false")) {
+            if(!treatmentJSON.getString("Musik").equals("Ohne")) {
                 d.setText(getTabbedString("Musik:", treatmentJSON.getString("Musik"), 500), TextView.BufferType.SPANNABLE);
                 textList.add(d);
             }

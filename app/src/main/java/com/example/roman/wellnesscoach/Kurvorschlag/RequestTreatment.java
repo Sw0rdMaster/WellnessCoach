@@ -13,7 +13,6 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.example.roman.wellnesscoach.Authentifizierung.MainWindow;
 import com.example.roman.wellnesscoach.R;
@@ -98,7 +97,7 @@ public class RequestTreatment extends AppCompatActivity {
     {
         //create an ArrayAdaptar from the String Array
         dataAdapter = new MyCustomAdapter(this,
-                R.layout.country_info, conditions);
+                R.layout.treatment_info, conditions);
         ListView listView = (ListView) findViewById(R.id.conditionList);
         // Assign adapter to ListView
         listView.setAdapter(dataAdapter);
@@ -237,7 +236,7 @@ public class RequestTreatment extends AppCompatActivity {
             if (convertView == null) {
                 LayoutInflater vi = (LayoutInflater) getSystemService(
                         Context.LAYOUT_INFLATER_SERVICE);
-                convertView = vi.inflate(R.layout.country_info, null);
+                convertView = vi.inflate(R.layout.treatment_info, null);
 
                 holder = new ViewHolder();
                 holder.name = (CheckBox) convertView.findViewById(R.id.checkBox1);

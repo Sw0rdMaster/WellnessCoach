@@ -32,7 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/spinEquip"
-            android:layout_above="@+id/button8">
+            android:layout_above="@+id/confirmButton">
 
 
             <ViewFlipper xmlns:android="http://schemas.android.com/apk/res/android"
@@ -55,12 +55,29 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Bestätigen"
-            android:id="@+id/button8"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
+            android:id="@+id/confirmButton"
             android:onClick="onEquipConfirmed"
             android:backgroundTint="@color/VaporHauptfarbe"
-            android:nestedScrollingEnabled="false" />
+            android:nestedScrollingEnabled="false"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_toRightOf="@+id/bAbbrechen"
+            android:layout_toEndOf="@+id/bAbbrechen" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Abbrechen"
+            android:id="@+id/bAbbrechen"
+            android:backgroundTint="@color/VaporHauptfarbe"
+            android:nestedScrollingEnabled="false"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:onClick="equipBackToOverview" />
+
+
 
     </RelativeLayout>
 

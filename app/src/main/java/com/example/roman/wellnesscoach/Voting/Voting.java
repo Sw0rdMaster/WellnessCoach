@@ -87,13 +87,13 @@ public class Voting extends AppCompatActivity{
             if(!currentTreatment.getString("Temperatur").equals("false")) {
                 arrayList.add(new VotingBar(1, Treatment_Fragment.getTabbedString("Temperatur:", currentTreatment.getString("Temperatur"), 350),"Temperatur"));
             }
-            if(!currentTreatment.getString("Light").equals("false")) {
+            if(!currentTreatment.getString("Light").equals("Ohne")) {
                 arrayList.add(new VotingBar(1, Treatment_Fragment.getTabbedString("Lichtfarbe:", currentTreatment.getString("Light"), 350), "Light"));
             }
             if(!currentTreatment.getString("Krauter").equals("false")) {
-                arrayList.add(new VotingBar(1, Treatment_Fragment.getTabbedString("Kräuter::", currentTreatment.getString("Krauter"), 350), "Krauter"));
+                arrayList.add(new VotingBar(1, Treatment_Fragment.getTabbedString("Kräuter:", currentTreatment.getString("Krauter"), 350), "Krauter"));
             }
-            if(!currentTreatment.getString("Musik").equals("false")) {
+            if(!currentTreatment.getString("Musik").equals("Ohne")) {
                 arrayList.add(new VotingBar(1, Treatment_Fragment.getTabbedString("Musik:", currentTreatment.getString("Musik"), 350), "Musik"));
             }
 

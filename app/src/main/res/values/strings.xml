@@ -8,7 +8,10 @@
     <string name="lichtfarbe">Lichtfarbe:\t\t\t\t\t</string>
     <string name="musik">Musik:\t\t\t\t\t\t\t\t\t\t</string>
 
-
+    <string name="kräuter_text">"Kräuter \n(Können für ihr Gerät Kräuter genutzt werden?)"</string>
+    <string name="licht_text">"Farblicht \n(Unterstützt ihr Gerät Farblichttherapie?)"</string>
+    <string name="musik_text">"Musik \n(Hat ihr Gerät eine eingebaute Musikfunktion?)"</string>
+    <string name="sole_text">"Sole \n(Unterstützt ihr Gerät Solebehandlung?)"</string>
 
     <string-array name="equip_list" >
         <item></item>

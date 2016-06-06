@@ -17,6 +17,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
+import com.example.roman.wellnesscoach.Authentifizierung.MainWindow;
 import com.example.roman.wellnesscoach.R;
 import com.example.roman.wellnesscoach.Server.ServerSchnittstelle;
 
@@ -73,6 +74,12 @@ public class Equipment_AddElement extends AppCompatActivity{
             }
         });
         asyncTask.execute(myJSON.toString());
+    }
+
+    public void equipBackToOverview(View v)
+    {
+        Intent goBack = new Intent(this, MainWindow.class);
+        startActivity(goBack);
     }
 
     public JSONObject createAddDeviceJSON()
@@ -172,16 +179,16 @@ public class Equipment_AddElement extends AppCompatActivity{
     public void fillFeatureList()
     {
         ArrayList<CustomCheckbox> featureList = new ArrayList<>();
-        featureList.add(0, new CustomCheckbox("Lichttherapie", false));
-        featureList.add(1, new CustomCheckbox("Kräuter \n(Können für ihr Gerät Kräuter genutzt werden?)", false));
-        featureList.add(2, new CustomCheckbox("Musik", false));
-        featureList.add(3, new CustomCheckbox("Sole", false));
-        featureList.add(4, new CustomCheckbox("Düfte", false));
-        dataAdapter = new MyCustomAdapter(this, R.layout.country_info, featureList);
+        featureList.add(0, new CustomCheckbox(getString(R.string.licht_text), false));
+        featureList.add(1, new CustomCheckbox(getString(R.string.kräuter_text), false));
+        featureList.add(2, new CustomCheckbox(getString(R.string.musik_text), false));
+        featureList.add(3, new CustomCheckbox(getString(R.string.sole_text), false));
+        dataAdapter = new MyCustomAdapter(this, R.layout.treatment_info, featureList);
 
         ListView fList = (ListView)findViewById(R.id.lEigenschaften);
         fList.setAdapter(dataAdapter);
     }
+
 
     private class MyCustomAdapter extends ArrayAdapter<CustomCheckbox> {
 
@@ -207,7 +214,7 @@ public class Equipment_AddElement extends AppCompatActivity{
             if (convertView == null) {
                 LayoutInflater vi = (LayoutInflater) getSystemService(
                         Context.LAYOUT_INFLATER_SERVICE);
-                convertView = vi.inflate(R.layout.country_info, null);
+                convertView = vi.inflate(R.layout.treatment_info, null);
 
                 holder = new ViewHolder();
                 holder.name = (CheckBox) convertView.findViewById(R.id.checkBox1);
@@ -235,6 +242,8 @@ public class Equipment_AddElement extends AppCompatActivity{
             return convertView;
 
         }
+
+
 
     }
 
