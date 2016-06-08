@@ -1,25 +1,20 @@
-package com.example.roman.wellnesscoach.Voting;
+package com.wellnesscoach.Voting;
 
-import android.annotation.SuppressLint;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Movie;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
-import com.example.roman.wellnesscoach.Authentifizierung.MainWindow;
-import com.example.roman.wellnesscoach.Kurvorschlag.Treatment_Fragment;
+import com.wellnesscoach.Authentifizierung.MainWindow;
+import com.wellnesscoach.Kurvorschlag.Treatment_Fragment;
 import com.example.roman.wellnesscoach.R;
-import com.example.roman.wellnesscoach.Server.ServerSchnittstelle;
+import com.wellnesscoach.Server.ServerSchnittstelle;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -178,7 +173,7 @@ public class Voting extends AppCompatActivity{
             public void processFinish(String output){
 
             }
-        });
+        }, ctx);
         asyncTask.execute(jsonObject.toString());
     }
 

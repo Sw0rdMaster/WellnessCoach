@@ -1,20 +1,16 @@
-package com.example.roman.wellnesscoach.Authentifizierung;
+package com.wellnesscoach.Authentifizierung;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.AppCompatButton;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.roman.wellnesscoach.R;
-import com.example.roman.wellnesscoach.Server.ServerSchnittstelle;
+import com.wellnesscoach.Server.ServerSchnittstelle;
 
 import org.json.JSONObject;
 import org.mindrot.jbcrypt.BCrypt;
@@ -71,7 +67,7 @@ public class Login extends AppCompatActivity {
             public void processFinish(String output){
                 checkPassword(output);
             }
-        });
+        }, ctx);
         asyncTask.execute(myJSON.toString());
     }
 

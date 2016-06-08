@@ -1,4 +1,4 @@
-package com.example.roman.wellnesscoach.Kurvorschlag;
+package com.wellnesscoach.Kurvorschlag;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,9 +14,9 @@ import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.Spinner;
 
-import com.example.roman.wellnesscoach.Authentifizierung.MainWindow;
+import com.wellnesscoach.Authentifizierung.MainWindow;
 import com.example.roman.wellnesscoach.R;
-import com.example.roman.wellnesscoach.Server.ServerSchnittstelle;
+import com.wellnesscoach.Server.ServerSchnittstelle;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -89,7 +89,7 @@ public class RequestTreatment extends AppCompatActivity {
                 fillCondList(condList);
 
             }
-        });
+        }, ctx);
         asyncTask.execute(jsonObject.toString());
     }
 
@@ -115,7 +115,7 @@ public class RequestTreatment extends AppCompatActivity {
                 showTreatment.putExtra("JSON", output);
                 startActivity(showTreatment);
             }
-        });
+        }, ctx);
         asyncTask.execute(myJSON.toString());
     }
 
@@ -198,7 +198,7 @@ public class RequestTreatment extends AppCompatActivity {
                 fillAimList(aimList);
 
             }
-        });
+        },ctx);
         asyncTask.execute(jsonObject.toString());
     }
 

@@ -1,4 +1,4 @@
-package com.example.roman.wellnesscoach.Voting;
+package com.wellnesscoach.Voting;
 
 import android.text.SpannableStringBuilder;
 

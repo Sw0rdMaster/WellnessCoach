@@ -1,4 +1,4 @@
-package com.example.roman.wellnesscoach.Kurvorschlag;
+package com.wellnesscoach.Kurvorschlag;
 
 import android.app.Fragment;
 import android.content.Intent;
@@ -16,8 +16,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.roman.wellnesscoach.Authentifizierung.MainWindow;
-import com.example.roman.wellnesscoach.Kurvorschlag.ProposeTreatment;
 import com.example.roman.wellnesscoach.R;
 
 import org.json.JSONObject;
@@ -133,7 +131,7 @@ public class Treatment_Fragment extends Fragment {
             treatmentTimer.setText("Kurdauer: " + treatmentJSON.getString("Time"));
             pauseTimer.setText("Pause: " + treatmentJSON.getString("Pause"));
 
-            treatmentTime = Integer.parseInt(treatmentJSON.getString("Time"));
+            treatmentTime = Integer.parseInt(treatmentJSON.getString("Time")) * 60;
             pauseTime = Integer.parseInt(treatmentJSON.getString("Pause"));
         }
         catch(Exception e)

@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/VaporsanaTheme" >
         <activity
-            android:name=".Authentifizierung.Login"
+            android:name="com.wellnesscoach.Authentifizierung.Login"
             android:label="@string/app_name"
             android:theme="@style/VaporsanaTheme"
             >
@@ -22,36 +22,36 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Authentifizierung.Register"
+            android:name="com.wellnesscoach.Authentifizierung.Register"
             android:label="@string/app_name"
             android:theme="@style/VaporsanaTheme"
             >
         </activity>
-        <activity android:name=".Authentifizierung.MainWindow"
+        <activity android:name="com.wellnesscoach.Authentifizierung.MainWindow"
             android:label="@string/app_name"
             android:theme="@style/VaporsanaTheme" >
         </activity>
-        <activity android:name=".Equipment.Equipment_Overview"
+        <activity android:name="com.wellnesscoach.Equipment.Equipment_Overview"
             android:theme="@style/VaporsanaTheme"
             android:label="@string/app_name"
             >
         </activity>
-        <activity android:name=".Equipment.Equipment_AddElement"
+        <activity android:name="com.wellnesscoach.Equipment.Equipment_AddElement"
             android:theme="@style/VaporsanaTheme"
             android:label="@string/app_name"
             >
         </activity>
-        <activity android:name=".Kurvorschlag.RequestTreatment"
+        <activity android:name="com.wellnesscoach.Kurvorschlag.RequestTreatment"
             android:theme="@style/VaporsanaTheme"
             android:label="@string/app_name"
             >
         </activity>
-        <activity android:name=".Kurvorschlag.ProposeTreatment"
+        <activity android:name="com.wellnesscoach.Kurvorschlag.ProposeTreatment"
             android:theme="@style/VaporsanaTheme"
             android:label="@string/app_name"
             >
         </activity>
-        <activity android:name=".Voting.Voting"
+        <activity android:name="com.wellnesscoach.Voting.Voting"
             android:theme="@style/VaporsanaTheme"
             android:label="@string/app_name"
             >

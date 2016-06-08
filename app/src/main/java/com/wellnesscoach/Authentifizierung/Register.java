@@ -1,6 +1,5 @@
-package com.example.roman.wellnesscoach.Authentifizierung;
+package com.wellnesscoach.Authentifizierung;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,7 +12,7 @@ import org.json.JSONObject;
 import org.mindrot.jbcrypt.BCrypt;
 
 import com.example.roman.wellnesscoach.R;
-import com.example.roman.wellnesscoach.Server.ServerSchnittstelle;
+import com.wellnesscoach.Server.ServerSchnittstelle;
 
 
 public class Register extends AppCompatActivity {
@@ -44,7 +43,7 @@ public class Register extends AppCompatActivity {
                     Intent backToLogin = new Intent(ctx, Login.class);
                     startActivity(backToLogin);
                 }
-            });
+            }, ctx);
             asyncTask.execute(myJSON.toString());
         }
         else

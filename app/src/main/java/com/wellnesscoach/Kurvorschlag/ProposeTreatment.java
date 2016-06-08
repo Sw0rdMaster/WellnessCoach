@@ -1,20 +1,18 @@
-package com.example.roman.wellnesscoach.Kurvorschlag;
+package com.wellnesscoach.Kurvorschlag;
 
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
-import com.example.roman.wellnesscoach.Authentifizierung.MainWindow;
+import com.wellnesscoach.Authentifizierung.MainWindow;
 import com.example.roman.wellnesscoach.R;
-import com.example.roman.wellnesscoach.Voting.Voting;
+import com.wellnesscoach.Voting.Voting;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.w3c.dom.Text;
 
 /**
  * Created by Roman on 28.04.2016.

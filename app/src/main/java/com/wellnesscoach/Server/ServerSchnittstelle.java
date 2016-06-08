@@ -1,11 +1,8 @@
-package com.example.roman.wellnesscoach.Server;
+package com.wellnesscoach.Server;
 
 import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.Toast;
-
-import org.json.JSONObject;
-import org.mindrot.jbcrypt.BCrypt;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -22,13 +19,15 @@ public class ServerSchnittstelle extends AsyncTask<String, String, String>{
     String URL_String = "http://bopa.one:7070/WellnessCoachServer/NameServlet";
     String data = "";
     AsyncResponse delegate = null;
+    Context ctx;
 
     public interface AsyncResponse {
         void processFinish(String output);
     }
 
-    public ServerSchnittstelle(AsyncResponse delegate) {
+    public ServerSchnittstelle(AsyncResponse delegate, Context context) {
         this.delegate = delegate;
+        ctx = context;
     }
 
     @Override
@@ -70,7 +69,14 @@ public class ServerSchnittstelle extends AsyncTask<String, String, String>{
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
-        delegate.processFinish(s);
+        if(s != null) {
+            delegate.processFinish(s);
+        }
+        else
+        {
+            Toast.makeText(ctx, "Fehlende Internetverbindung", Toast.LENGTH_LONG).show();
+        }
+
 
     }
 

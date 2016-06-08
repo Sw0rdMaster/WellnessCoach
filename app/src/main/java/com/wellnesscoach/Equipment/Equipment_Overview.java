@@ -1,4 +1,4 @@
-package com.example.roman.wellnesscoach.Equipment;
+package com.wellnesscoach.Equipment;
 
 import android.app.ListActivity;
 import android.content.Context;
@@ -12,9 +12,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
-import com.example.roman.wellnesscoach.Authentifizierung.MainWindow;
+import com.wellnesscoach.Authentifizierung.MainWindow;
 import com.example.roman.wellnesscoach.R;
-import com.example.roman.wellnesscoach.Server.ServerSchnittstelle;
+import com.wellnesscoach.Server.ServerSchnittstelle;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -87,7 +87,7 @@ public class Equipment_Overview extends ListActivity {
                     System.err.print(e.getStackTrace());
                 }
             }
-        });
+        }, ctx);
         asyncTask.execute(json.toString());
     }
 
@@ -150,7 +150,7 @@ public class Equipment_Overview extends ListActivity {
                 Intent reloadPage = new Intent(ctx, Equipment_Overview.class);
                 startActivity(reloadPage);
             }
-        });
+        }, ctx);
         asyncTask.execute(jsono.toString());
 
     }

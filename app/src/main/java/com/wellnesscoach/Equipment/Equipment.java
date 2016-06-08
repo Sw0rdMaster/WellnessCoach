@@ -1,4 +1,4 @@
-package com.example.roman.wellnesscoach.Equipment;
+package com.wellnesscoach.Equipment;
 
 /**
  * Created by Roman on 09.04.2016.

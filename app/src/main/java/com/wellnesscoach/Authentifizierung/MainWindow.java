@@ -1,26 +1,20 @@
-package com.example.roman.wellnesscoach.Authentifizierung;
+package com.wellnesscoach.Authentifizierung;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.roman.wellnesscoach.Authentifizierung.Login;
-import com.example.roman.wellnesscoach.Equipment.Equipment_Overview;
-import com.example.roman.wellnesscoach.Kurvorschlag.RequestTreatment;
+import com.wellnesscoach.Equipment.Equipment_Overview;
+import com.wellnesscoach.Kurvorschlag.RequestTreatment;
 import com.example.roman.wellnesscoach.R;
-import com.example.roman.wellnesscoach.Server.ServerSchnittstelle;
+import com.wellnesscoach.Server.ServerSchnittstelle;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
 
 public class MainWindow extends AppCompatActivity {
 
@@ -142,7 +136,7 @@ public class MainWindow extends AppCompatActivity {
                     System.err.print(e.getStackTrace());
                 }
             }
-        });
+        }, ctx);
         asyncTask.execute(json.toString());
     }
 

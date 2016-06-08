@@ -1,4 +1,4 @@
-package com.example.roman.wellnesscoach;
+package com.wellnesscoach;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

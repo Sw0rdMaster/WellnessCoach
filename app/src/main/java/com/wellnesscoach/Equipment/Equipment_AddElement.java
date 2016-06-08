@@ -1,4 +1,4 @@
-package com.example.roman.wellnesscoach.Equipment;
+package com.wellnesscoach.Equipment;
 
 import android.content.Context;
 import android.content.Intent;
@@ -17,9 +17,9 @@ import android.widget.Spinner;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
-import com.example.roman.wellnesscoach.Authentifizierung.MainWindow;
+import com.wellnesscoach.Authentifizierung.MainWindow;
 import com.example.roman.wellnesscoach.R;
-import com.example.roman.wellnesscoach.Server.ServerSchnittstelle;
+import com.wellnesscoach.Server.ServerSchnittstelle;
 
 import org.json.JSONObject;
 
@@ -72,7 +72,7 @@ public class Equipment_AddElement extends AppCompatActivity{
                 Intent backToDevices = new Intent(ctx, Equipment_Overview.class);
                 startActivity(backToDevices);
             }
-        });
+        }, ctx);
         asyncTask.execute(myJSON.toString());
     }
 
@@ -98,6 +98,7 @@ public class Equipment_AddElement extends AppCompatActivity{
                 CustomCheckbox x = checkBoxList.get(i);
                 jsonObject.put(stringToFunction(x.getName()), Boolean.toString(x.isSelected()));
             }
+            jsonObject.put("Dufte", "false");
         }
         catch(Exception e)
         {
@@ -110,27 +111,24 @@ public class Equipment_AddElement extends AppCompatActivity{
 
     public String stringToFunction(String a)
     {
+        String result = null;
         if(a.contains("Kräuter"))
         {
-            return "Krauter";
+            result = "Krauter";
         }
-        if(a.contains("Licht"))
+        if(a.contains("licht"))
         {
-            return "Licht";
+            result = "Licht";
         }
         if(a.contains("Musik"))
         {
-            return "Musik";
+            result = "Musik";
         }
         if(a.contains("Sole"))
         {
-            return "Sole";
+            result = "Sole";
         }
-        if(a.contains("Düfte"))
-        {
-            return "Dufte";
-        }
-        return null;
+        return result;
     }
 
 
