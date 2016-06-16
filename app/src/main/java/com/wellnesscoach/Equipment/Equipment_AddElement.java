@@ -48,8 +48,14 @@ public class Equipment_AddElement extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_equipment);
         getUser();
+        fillEquipSpinner();
         spinnerEvent();
         fillFeatureList();
+
+    }
+
+    public void fillEquipSpinner()
+    {
 
     }
 
@@ -146,18 +152,8 @@ public class Equipment_AddElement extends AppCompatActivity{
                     case "":
                         vf.setDisplayedChild(0);
                         break;
-                    case "Dampfbad":
+                    default:
                         vf.setDisplayedChild(1);
-                        break;
-                    case "Hotspring":
-                        vf.setDisplayedChild(1);
-                        break;
-                    case "Sauna":
-                        vf.setDisplayedChild(1);
-                        break;
-                    case "Whirlpool":
-                        vf.setDisplayedChild(1);
-                        break;
 
                 }
 

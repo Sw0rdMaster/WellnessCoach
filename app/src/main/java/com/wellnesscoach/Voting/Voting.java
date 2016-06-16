@@ -80,7 +80,7 @@ public class Voting extends AppCompatActivity{
                 arrayList.add(new VotingBar(1, Treatment_Fragment.getTabbedString("Gerät:", currentTreatment.getString("Device"), 350), "Device"));
             }
             if(!currentTreatment.getString("Temperatur").equals("false")) {
-                arrayList.add(new VotingBar(1, Treatment_Fragment.getTabbedString("Temperatur:", currentTreatment.getString("Temperatur"), 350),"Temperatur"));
+                arrayList.add(new VotingBar(1, Treatment_Fragment.getTabbedString("Temperatur:", currentTreatment.getString("Temperatur")+"°C", 350),"Temperatur"));
             }
             if(!currentTreatment.getString("Light").equals("Ohne")) {
                 arrayList.add(new VotingBar(1, Treatment_Fragment.getTabbedString("Lichtfarbe:", currentTreatment.getString("Light"), 350), "Light"));

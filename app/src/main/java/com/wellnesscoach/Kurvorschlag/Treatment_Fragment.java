@@ -104,7 +104,7 @@ public class Treatment_Fragment extends Fragment {
 
             TextView a = new TextView(getActivity());
             if(!treatmentJSON.getString("Temperatur").equals("false")) {
-                a.setText(getTabbedString("Temperatur:", treatmentJSON.getString("Temperatur"), 500), TextView.BufferType.SPANNABLE);
+                a.setText(getTabbedString("Temperatur:", treatmentJSON.getString("Temperatur")+"°C", 500), TextView.BufferType.SPANNABLE);
                 textList.add(a);
             }
 
@@ -132,7 +132,7 @@ public class Treatment_Fragment extends Fragment {
             pauseTimer.setText("Pause: " + treatmentJSON.getString("Pause"));
 
             treatmentTime = Integer.parseInt(treatmentJSON.getString("Time")) * 60;
-            pauseTime = Integer.parseInt(treatmentJSON.getString("Pause"));
+            pauseTime = Integer.parseInt(treatmentJSON.getString("Pause")) * 60;
         }
         catch(Exception e)
         {

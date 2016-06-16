@@ -15,8 +15,9 @@ import java.net.URL;
  * Created by Roman on 10.04.2016.
  */
 public class ServerSchnittstelle extends AsyncTask<String, String, String>{
-    //String URL_String = "http://10.3.96.166:8080/WellnessCoachServer/NameServlet";
-    String URL_String = "http://bopa.one:7070/WellnessCoachServer/NameServlet";
+    String URL_String = "http://192.168.1.117:8080/WellnessCoachServer/NameServlet";
+    //String URL_String = "http://10.0.2.2:8080/WellnessCoachServer/NameServlet";
+    //String URL_String = "http://bopa.one:7070/WellnessCoachServer/NameServlet";
     String data = "";
     AsyncResponse delegate = null;
     Context ctx;
@@ -74,7 +75,7 @@ public class ServerSchnittstelle extends AsyncTask<String, String, String>{
         }
         else
         {
-            Toast.makeText(ctx, "Fehlende Internetverbindung", Toast.LENGTH_LONG).show();
+            Toast.makeText(ctx, "Keine Verbindung zum Server", Toast.LENGTH_LONG).show();
         }
 
 
